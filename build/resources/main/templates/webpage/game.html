@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/data/jaxb">
+<head th:replace="fragments :: head">
+
+</head>
+<body>
+
+<nav th:replace="fragments :: nav">
+
+</nav>
+
+<div th:replace="fragments :: donate"></div>
+
+
+<div class="container-fluid">
+    <div class="container">
+        <div class="row">
+            <div>
+                <p id="gameID" th:text="${game_info.game_id}"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid game-header-container">
+    <div class="container">
+        <div class="row game-page-info">
+
+            <div class="row game-ko-time">
+                <h1 th:text="'KO Time: ' + ${game_info.ko_time}"></h1>
+            </div>
+
+            <div class="row game-title">
+
+                <div class="col-md-5 game-title">
+                    <div class="game-info-positioner">
+                            <span>
+                                <img th:src="@{'/images/badges/'+ ${game_info.homeID}} + '.svg'"></img>
+                            </span>
+                            <span>
+                                <p th:text="${game_info.home}"></p>
+                            </span>
+                    </div>
+                </div>
+
+                <div class="col-md-2 game-title">
+                    <div class="game-info-positioner">
+                        <span>
+                            <p>  vs  </p>
+                        </span>
+                    </div>
+                </div>
+
+                <div  class="col-md-5 game-title">
+                    <div class="game-info-positioner">
+                            <span>
+                                <p th:text="${game_info.away}"></p>
+                            </span>
+                            <span>
+                                <img th:src="@{'/images/badges/'+ ${game_info.awayID}} + '.svg'"></img>
+                            </span>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<div id="response-message-container">
+    <div id="response-message">
+
+    </div>
+</div>
+
+<div class="container-fluid link-list-container">
+    <div class="container header-title">
+        <h1>Link List</h1>
+    </div>
+</div>
+
+
+
+<div th:replace="fragments :: stream_list">
+
+</div>
+
+</body>
+
+<script>
+    $(document).ready(function() {
+
+
+
+        $(".btn-down").on('click', function () {
+            var game = $('#gameID').text();
+            var t = $(this);
+            var streamIDContainer = t.closest('.stream-info-holder');
+            var idContainer = streamIDContainer.find('#streamId');
+            var id = idContainer.find('p').text();
+            url = '/vote/down/' + game + '/' + id;
+
+            $.post(url, function (data, status) {
+                t.closest('#vote-box-response').replaceWith(data);
+                // alert(data);
+                // $('#response-message').replaceWith(data);
+
+            });
+
+        });
+
+        $(".btn-up").on('click', function () {
+            var game = $('#gameID').text();
+            var t = $(this);
+
+            var streamIDContainer = t.closest('.stream-info-holder');
+            var idContainer = streamIDContainer.find('#streamId');
+            var id = idContainer.find('p').text();
+            url = '/vote/up/' + game + '/' + id;
+
+            $.post(url, function (data, status) {
+                t.closest('#vote-box-response').replaceWith(data);
+                // $('#response-message')
+                // alert(data);
+            });
+        });
+
+    });
+
+</script>
+</html>
