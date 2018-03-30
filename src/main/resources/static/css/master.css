@@ -104,7 +104,7 @@ width: 60px;
 
 .game-title img{
     float: left;
-    width: 36px;
+    width: auto;
     height: 36px;
     max-height: 35px;
     margin-top: 4px;
@@ -320,7 +320,7 @@ width: fit-content;
 }
 
 .game-info-positioner img{
-    width: 120px;
+    width: auto;
     height: 120px;
     max-height: none;
 }
@@ -357,7 +357,8 @@ width: fit-content;
 
 .vote-value{
     /*float: right;*/
-    text-shadow: 1px 1px 1px #565656;
+    text-shadow: 1px 1px 1px #ffffff;
+    color: dimgrey !important;
     /*text-align: center;*/
 }
 
@@ -405,10 +406,13 @@ width: fit-content;
 
 .streamId-hide{
     visibility: hidden;
+    width: 0px;
+    height: 0px;
+    margin-top: 0px !important;
 }
 
-#streamId{
-    visibility: hidden;
+#streamId i{
+    margin-left: 15px;
 }
 
 .stream-url{

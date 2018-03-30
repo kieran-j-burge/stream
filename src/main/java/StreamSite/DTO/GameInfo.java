@@ -17,6 +17,8 @@ public class GameInfo {
     private int awayID;
     private String home;
     private String away;
+    private String homeImg;
+    private String awayImg;
     private String ko_time;
 
 }

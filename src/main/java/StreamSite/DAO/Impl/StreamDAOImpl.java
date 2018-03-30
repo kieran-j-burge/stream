@@ -24,7 +24,7 @@ public class StreamDAOImpl implements StreamDAO {
     @Override
     public List<Stream> getStreamsByGameId(int id) {
         List<Stream> streamList = new ArrayList<>();
-        jdbcTemplate.query("SELECT * FROM `streams` WHERE `game_id` = ?; ",
+        jdbcTemplate.query("SELECT * FROM `streams` WHERE `game_id` = ? ORDER BY vote; ",
                 new Object[]{id},
                 (rs, rowNum) -> streamList.add(new Stream(
                         rs.getInt("stream_id"),

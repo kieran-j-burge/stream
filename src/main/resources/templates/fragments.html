@@ -3,6 +3,7 @@
 <head th:fragement="head">
     <meta charset="UTF-8"/>
     <title>CleanStreams</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel='shortcut icon' type='image/x-icon' href='/images/misc/icon.png' />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- Latest compiled and minified CSS -->
@@ -86,7 +87,7 @@
                             <div  class="col-md-4 game-title">
                                 <!--<a th:href="@{'/game/' + ${game.game_id}}">-->
                                     <span>
-                                        <img th:src="@{'/images/badges/'+ ${game.homeID}} + '.svg'" onerror="this.src='/images/badges/999.svg'"></img>
+                                        <img th:src="@{'/images/badges/'+ ${game.homeImg}} + '.svg'" onerror="this.src='/images/badges/999.svg'"></img>
                                     </span>
                                     <span>
                                         <p th:text="${game.home}"></p>
@@ -102,7 +103,7 @@
                                         <p th:text="${game.away}"></p>
                                     </span>
                                     <span>
-                                        <img th:src="@{'/images/badges/'+ ${game.awayID}} + '.svg'" onerror="this.src='/images/badges/999.svg'"></img>
+                                        <img th:src="@{'/images/badges/'+ ${game.awayImg}} + '.svg'" onerror="this.src='/images/badges/999.svg'"></img>
                                     </span>
 
                             </div>
@@ -126,6 +127,7 @@
                         <div id="streamId" class="col-md-1">
                             <a th:href="@{'/stream_page/' + ${stream.stream_id}}">
                                 <p class="streamId-hide" th:text="${stream.stream_id}"></p>
+                                <i class="fa fa-tv" style="font-size:36px"></i>
                             </a>
                         </div>
                         <div  class="col-md-5">
@@ -188,7 +190,7 @@
                             </div>
                             <div  class="col-md-4 game-title">
                                 <span>
-                                    <img th:src="@{'/images/badges/'+ ${game.homeID}} + '.svg'" onerror="this.src='/images/badges/999.svg'"></img>
+                                    <img th:src="@{'/images/badges/'+ ${game.homeImg}} + '.svg'" onerror="this.src='/images/badges/999.svg'"></img>
                                 </span>
                                 <span>
                                     <p th:text="${game.home}"></p>
@@ -202,7 +204,7 @@
                                     <p th:text="${game.away}"></p>
                                 </span>
                                 <span>
-                                    <img th:src="@{'/images/badges/'+ ${game.awayID}} + '.svg'" onerror="this.src='/images/badges/999.svg'"></img>
+                                    <img th:src="@{'/images/badges/'+ ${game.awayImg}} + '.svg'" onerror="this.src='/images/badges/999.svg'"></img>
                                 </span>
                             </div>
                             <div class="col-md-1">
@@ -256,7 +258,7 @@
                             </div>
                             <div  class="col-md-4 game-title">
                                 <span>
-                                    <img th:src="@{'/images/badges/'+ ${game.homeID}} + '.svg'" onerror="this.src='/images/badges/999.svg'"></img>
+                                    <img th:src="@{'/images/badges/'+ ${game.homeImg}} + '.svg'" onerror="this.src='/images/badges/999.svg'"></img>
                                 </span>
                                 <span>
                                     <p th:text="${game.home}"></p>
@@ -270,7 +272,7 @@
                                     <p th:text="${game.away}"></p>
                                 </span>
                                 <span>
-                                    <img th:src="@{'/images/badges/'+ ${game.awayID}} + '.svg'" onerror="this.src='/images/badges/999.svg'"></img>
+                                    <img th:src="@{'/images/badges/'+ ${game.awayImg}} + '.svg'" onerror="this.src='/images/badges/999.svg'"></img>
                                 </span>
                             </div>
                             <div class="col-md-1">

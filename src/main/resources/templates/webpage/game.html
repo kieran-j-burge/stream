@@ -35,7 +35,7 @@
                 <div class="col-md-5 game-title">
                     <div class="game-info-positioner">
                             <span>
-                                <img th:src="@{'/images/badges/'+ ${game_info.homeID}} + '.svg'"></img>
+                                <img th:src="@{'/images/badges/'+ ${game_info.homeImg}} + '.svg'" onerror="this.src='/images/badges/999.svg'"></img>
                             </span>
                             <span>
                                 <p th:text="${game_info.home}"></p>
@@ -57,7 +57,7 @@
                                 <p th:text="${game_info.away}"></p>
                             </span>
                             <span>
-                                <img th:src="@{'/images/badges/'+ ${game_info.awayID}} + '.svg'"></img>
+                                <img th:src="@{'/images/badges/'+ ${game_info.awayImg}} + '.svg'" onerror="this.src='/images/badges/999.svg'"></img>
                             </span>
                     </div>
                 </div>
