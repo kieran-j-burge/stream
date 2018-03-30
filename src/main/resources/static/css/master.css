@@ -405,7 +405,10 @@ width: fit-content;
 
 .streamId-hide{
     visibility: hidden;
+}
 
+#streamId{
+    visibility: hidden;
 }
 
 .stream-url{
