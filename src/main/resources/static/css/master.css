@@ -24,8 +24,13 @@
 
 .stream-info-holder p{
     margin-top: 10px;
-    text-shadow: 1px 1px 1px #565656;
+    /*text-shadow: 1px 1px 1px #565656;*/
     color: black;
+    word-wrap: break-word;
+}
+
+.stream-info-holder p:hover{
+    color: #112586;
 }
 
 .game-info-holder p {
@@ -309,7 +314,7 @@ width: fit-content;
 
 
 .game-info-positioner p{
-    font-size: 35px;
+    font-size: 25px;
     margin-top: 40px;
     font-weight: bold;
 }
@@ -395,6 +400,12 @@ width: fit-content;
 .channel-img-positioner img{
     width: 200px;
     /*height: 30px;*/
+}
+
+
+.streamId-hide{
+    visibility: hidden;
+
 }
 
 .stream-url{

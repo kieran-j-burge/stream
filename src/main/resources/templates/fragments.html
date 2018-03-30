@@ -121,11 +121,11 @@
     <div th:fragment="stream_list">
         <div class="container-fluid">
             <div class="container">
-                <th:block th:if="${stream_list != null}" th:each="stream : ${stream_list}">
+                <th:block th:if="${stream_list != null}" th:each="stream,status : ${stream_list}">
                     <div class="row stream-info-holder">
-                        <div  id="streamId" class="col-md-1">
+                        <div id="streamId" class="col-md-1">
                             <a th:href="@{'/stream_page/' + ${stream.stream_id}}">
-                                <p th:text="${stream.stream_id}"></p>
+                                <p class="streamId-hide" th:text="${stream.stream_id}"></p>
                             </a>
                         </div>
                         <div  class="col-md-5">

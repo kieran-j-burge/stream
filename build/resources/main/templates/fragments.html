@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:fragement="head">
+    <meta charset="UTF-8"/>
+    <title>CleanStreams</title>
+    <link rel='shortcut icon' type='image/x-icon' href='/images/misc/icon.png' />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"/>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" th:href="@{/css/master.css}" href="/static/css/master.css"/>
+    <script async="async" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-5981371367764735",
+            enable_page_level_ads: true
+        });
+    </script>
+</head>
+
+
+<body>
+
+    <nav th:fragement="nav" class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">CleanStreams</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/">Home</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Quick Pick
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/league/1">Premier League</a></li>
+                        <li><a href="/league/2">Liga Santander</a></li>
+                        <li><a href="/league/3">Bundasliga</a></li>
+                    </ul>
+                </li>
+                <li><a href="/leagues">Leagues</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div th:fragment="message">
+        <div class="container-fluid message-container">
+            <div class="container">
+                <div class="row">
+                    <p class="message-txt">Welcome to <b>CleanStreams</b>. If you find our service useful, help us out by dropping a small donation to improve the quality of our site </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:fragment="donate">
+        <div class="container-fluid">
+            <div class="container">
+                <div class="row">
+                    <span>
+                        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                            <input type="hidden" name="cmd" value="_s-xclick"/>
+                            <input type="hidden" name="hosted_button_id" value="YMS7GC48TBP7A"/>
+                            <input class="pay-pal-img" type="image" src="http://s3.amazonaws.com/authorjar.com/wp-content/uploads/sites/30/20170307212206/Paypal-Logo-Transparent-png-format-large-size1.png" border="0" name="submit" alt="PayPal – The safer, easier way to pay online!"/>
+                            <img  alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1"/>
+                        </form>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div th:fragment="home_page_game_list">
+        <div class="container-fluid">
+            <div class="container">
+                <th:block th:each="game : ${game_list}">
+                    <div class="row game-info-holder">
+                        <a th:href="@{'/game/' + ${game.game_id}}">
+                            <div  class="col-md-1">
+                                    <p th:text="${game.ko_time}"></p>
+                                <!--</a>-->
+                            </div>
+                            <div  class="col-md-4 game-title">
+                                <!--<a th:href="@{'/game/' + ${game.game_id}}">-->
+                                    <span>
+                                        <img th:src="@{'/images/badges/'+ ${game.homeID}} + '.svg'" onerror="this.src='/images/badges/999.svg'"></img>
+                                    </span>
+                                    <span>
+                                        <p th:text="${game.home}"></p>
+                                    </span>
+                                <!--</a>-->
+                            </div>
+                            <div class="col-md-2 game-title vs-spacer">
+                                <p class="">  vs  </p>
+                            </div>
+                            <div  class="col-md-4 game-title">
+                                <!--<a th:href="@{'/game/' + ${game.game_id}}">-->
+                                    <span>
+                                        <p th:text="${game.away}"></p>
+                                    </span>
+                                    <span>
+                                        <img th:src="@{'/images/badges/'+ ${game.awayID}} + '.svg'" onerror="this.src='/images/badges/999.svg'"></img>
+                                    </span>
+
+                            </div>
+                            <div class="col-md-1">
+
+                            </div>
+                        </a>
+                    </div>
+                </th:block>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div th:fragment="stream_list">
+        <div class="container-fluid">
+            <div class="container">
+                <th:block th:if="${stream_list != null}" th:each="stream,status : ${stream_list}">
+                    <div class="row stream-info-holder">
+                        <div id="streamId" class="col-md-1">
+                            <a th:href="@{'/stream_page/' + ${stream.stream_id}}">
+                                <p class="streamId-hide" th:text="${stream.stream_id}"></p>
+                            </a>
+                        </div>
+                        <div  class="col-md-5">
+                            <a th:href="@{'/stream_page/' + ${stream.stream_id}}">
+                                <p th:text="${stream.url}"></p>
+                            </a>
+                        </div>
+                        <div class="col-md-3">
+
+                            <p th:if="${stream.vote &gt; 0}" class="vote-value" th:text="'Link Quality: + '+  ${stream.vote}"></p>
+                            <p th:if="${stream.vote &lt; 0}" class="vote-value" th:text="'Link Quality:  '+  ${stream.vote}"></p>
+                            <p th:if="${stream.vote == 0}" class="vote-value" th:text="'Link Quality:  No Responses'"></p>
+
+                        </div>
+                        <div  id="vote-box-container" class="col-md-3">
+                            <div id="vote-box-response">
+                                <a class="btn btn-info btn-lg btn-down">
+                                    <span class="glyphicon glyphicon-thumbs-down"></span> Bad
+                                </a>
+                                <a class="btn btn-info btn-lg btn-up">
+                                    <span class="glyphicon glyphicon-thumbs-up"></span> Good
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </th:block>
+            </div>
+        </div>
+    </div>
+
+    <div th:fragment="league_list">
+        <div class="container-fluid">
+            <div class="container">
+                <th:block th:each="league : ${league_list}">
+                    <div class="col-md-5 league-holder ">
+                        <a th:href = "@{'/league/' + ${league.league_id}}">
+                            <div class="league-info-holder">
+                                <div>
+                                    <img th:src="@{'/images/leagues/' + ${league.img}}" alt=""/>
+                                </div>
+                                <div class="league-name">
+                                    <h1 th:text="${league.name}"></h1>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </th:block>
+            </div>
+        </div>
+    </div>
+
+    <div th:fragment="game_list">
+        <div class="container-fluid">
+            <div class="container">
+                <th:block th:each="game : ${game_list}">
+                    <div class="row game-info-holder">
+                        <a th:href="@{'/game/' + ${game.game_id}}">
+                            <div  class="col-md-1">
+                                <p th:text="${game.ko_time}"></p>
+                            </div>
+                            <div  class="col-md-4 game-title">
+                                <span>
+                                    <img th:src="@{'/images/badges/'+ ${game.homeID}} + '.svg'" onerror="this.src='/images/badges/999.svg'"></img>
+                                </span>
+                                <span>
+                                    <p th:text="${game.home}"></p>
+                                </span>
+                            </div>
+                            <div class="col-md-2 game-title vs-spacer">
+                                <p class="">  vs  </p>
+                            </div>
+                            <div  class="col-md-4 game-title">
+                                <span>
+                                    <p th:text="${game.away}"></p>
+                                </span>
+                                <span>
+                                    <img th:src="@{'/images/badges/'+ ${game.awayID}} + '.svg'" onerror="this.src='/images/badges/999.svg'"></img>
+                                </span>
+                            </div>
+                            <div class="col-md-1">
+                            </div>
+                        </a>
+                    </div>
+                </th:block>
+            </div>
+        </div>
+    </div>
+
+    <div th:fragment="admin-options">
+        <div class="container-fluid">
+            <div class="container">
+                <div class="row">
+                    <a href="/admin/add-games">
+                        <div class="col-md-6 admin-option add-games">
+                            <h1>Add Games</h1>
+                        </div>
+                    </a>
+                    <a href="/admin/add-links">
+                        <div class="col-md-6 admin-option add-links">
+                            <h1>Add Links</h1>
+                        </div>
+                    </a>
+                    <a href="/admin/add-clubs">
+                        <div class="col-md-6 admin-option add-clubs">
+                            <h1>Add Clubs</h1>
+                        </div>
+                    </a>
+                    <a href="/admin/remove-games">
+                        <div class="col-md-6 admin-option remove-games">
+                            <h1>Remove Games</h1>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div th:fragment="admin_page_game_list">
+        <div class="container-fluid">
+            <div class="container">
+                <th:block th:each="game : ${game_list}">
+                    <div class="row game-info-holder">
+                        <a th:href="@{'/admin/game/' + ${game.game_id}}">
+                            <div  class="col-md-1">
+                                <p th:text="${game.ko_time}"></p>
+                            </div>
+                            <div  class="col-md-4 game-title">
+                                <span>
+                                    <img th:src="@{'/images/badges/'+ ${game.homeID}} + '.svg'" onerror="this.src='/images/badges/999.svg'"></img>
+                                </span>
+                                <span>
+                                    <p th:text="${game.home}"></p>
+                                </span>
+                            </div>
+                            <div class="col-md-2 game-title vs-spacer">
+                                <p class="">  vs  </p>
+                            </div>
+                            <div  class="col-md-4 game-title">
+                                <span>
+                                    <p th:text="${game.away}"></p>
+                                </span>
+                                <span>
+                                    <img th:src="@{'/images/badges/'+ ${game.awayID}} + '.svg'" onerror="this.src='/images/badges/999.svg'"></img>
+                                </span>
+                            </div>
+                            <div class="col-md-1">
+
+                            </div>
+                        </a>
+                    </div>
+                </th:block>
+            </div>
+        </div>
+    </div>
+
+    <div th:fragment="vote_message">
+        <p th:text="${message}"></p>
+    </div>
+
+    <div th:fragment="stream-info-container">
+        <a th:href="@{${stream_info.url}}">
+            <div class="container-fluid stream-info-container">
+                <div class="container">
+                    <div class="row link-quality">
+                        <h1 th:text="'Link Quality: ' + ${stream_info.vote}"></h1>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 stream-url-container">
+                            <h1 class="stream-url" th:text="${stream_info.url}"></h1>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="channel-img-container">
+                            <th:block th:each="channel : ${channel_list}">
+                                <div class="channel-img-positioner">
+                                    <img th:src="@{'/images/channels/'+ ${channel.img}}" alt=""/>
+                                </div>
+                            </th:block>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+
+
+
+
+</body>
+
+
+
+</html>
