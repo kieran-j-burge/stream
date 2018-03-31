@@ -2,6 +2,7 @@ package StreamSite.DAO.Impl;
 
 import StreamSite.DAO.GameDAO;
 import StreamSite.DTO.GameInfo;
+import StreamSite.DTO.TweetInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -93,5 +94,16 @@ public class GameDAOImpl implements GameDAO {
                         rs.getString("ko_time"))
                 ));
         return gameSearchList;
+    }
+
+    @Override
+    public TweetInfo getTweetMessage() {
+        return jdbcTemplate.queryForObject("SELECT game.game_id, game.home, game.away, (SELECT `name` FROM clubs WHERE club_id = game.home) AS 'HomeTeam', (SELECT `name` FROM clubs WHERE club_id = game.away) AS ' AwayTeam', game.ko_time FROM game ORDER BY RAND() LIMIT 1",
+                new Object[]{},
+                (rs, rowNum) -> new TweetInfo(
+                        rs.getString("HomeTeam"),
+                        rs.getString("AwayTeam"),
+                        rs.getString("ko_time")
+                ));
     }
 }

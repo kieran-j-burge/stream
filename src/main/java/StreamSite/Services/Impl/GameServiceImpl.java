@@ -2,6 +2,7 @@ package StreamSite.Services.Impl;
 
 import StreamSite.DAO.GameDAO;
 import StreamSite.DTO.GameInfo;
+import StreamSite.DTO.TweetInfo;
 import StreamSite.Services.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,6 +40,13 @@ public class GameServiceImpl implements GameService {
     public List<GameInfo> getGamesBySearch(String game) {
         game = "%"+game+"%";
         return gameDAO.getGamesBySearch(game);
+    }
+
+    @Override
+    public String getTweetMessage() {
+        TweetInfo game = gameDAO.getTweetMessage();
+        String msg = ("Find a link to watch | " + game.getHome() +" vs "+ game.getAway() +" | on http://www.cleanstreams.co.uk/ " );
+        return msg;
     }
 
 

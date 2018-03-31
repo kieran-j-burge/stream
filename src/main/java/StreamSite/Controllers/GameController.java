@@ -1,5 +1,6 @@
 package StreamSite.Controllers;
 
+import StreamSite.Services.AdminService;
 import StreamSite.Services.GameService;
 import StreamSite.Services.StreamService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,17 +16,20 @@ public class GameController {
 
     private GameService gameService;
     private StreamService streamService;
+    private AdminService adminService;
 
     @Autowired
-    public GameController(GameService gameService, StreamService streamService) {
+    public GameController(GameService gameService, StreamService streamService, AdminService adminService) {
         this.gameService = gameService;
         this.streamService = streamService;
+        this.adminService = adminService;
     }
 
 
     @RequestMapping(value = "/game/{id}", method = GET)
     public String retreiveGamePage(Model model, HttpSession session,
                                    @PathVariable("id") int id){
+        adminService.updatePageCount(2);
         try {
             model.addAttribute("game_info", gameService.getGameById(id));
             model.addAttribute("stream_list", streamService.getStreamsByGameId(id));

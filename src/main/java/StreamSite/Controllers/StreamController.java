@@ -1,5 +1,6 @@
 package StreamSite.Controllers;
 
+import StreamSite.Services.AdminService;
 import StreamSite.Services.GameService;
 import StreamSite.Services.LeagueService;
 import StreamSite.Services.StreamService;
@@ -18,12 +19,14 @@ public class StreamController {
 
     private GameService gameService;
     private StreamService streamService;
+    private AdminService adminService;
 
     @Autowired
-    public StreamController(GameService gameService, StreamService streamService) {
+    public StreamController(GameService gameService, StreamService streamService, AdminService adminService) {
 
         this.gameService = gameService;
         this.streamService = streamService;
+        this.adminService= adminService;
 
 
     }
@@ -31,6 +34,7 @@ public class StreamController {
     @RequestMapping(value = "/stream_page/{id}", method = GET)
     public String retreiveGamesForLeague(Model model, HttpSession session,
                                          @PathVariable("id") int id){
+        adminService.updatePageCount(3);
 
         try {
             model.addAttribute("stream_info", streamService.getStreamById(id));

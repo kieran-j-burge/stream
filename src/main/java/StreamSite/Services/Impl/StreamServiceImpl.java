@@ -3,6 +3,7 @@ package StreamSite.Services.Impl;
 import StreamSite.DAO.GameDAO;
 import StreamSite.DAO.StreamDAO;
 import StreamSite.DTO.Channel;
+import StreamSite.DTO.GameInfo;
 import StreamSite.DTO.Stream;
 import StreamSite.Services.StreamService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,4 +45,6 @@ public class StreamServiceImpl implements StreamService {
     public List<Channel> getStreamChannel(int id) {
         return streamDAO.getStreamChannel(id);
     }
+
+
 }

@@ -2,6 +2,7 @@ package StreamSite.DAO;
 
 
 import StreamSite.DTO.GameInfo;
+import StreamSite.DTO.TweetInfo;
 
 import java.util.List;
 
@@ -11,4 +12,5 @@ public interface GameDAO {
     GameInfo getGameById(int id);
     List<GameInfo> getGameByLeagueId(int id);
     List<GameInfo> getGamesBySearch(String game);
+    TweetInfo getTweetMessage();
 }

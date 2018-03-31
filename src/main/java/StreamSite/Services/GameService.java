@@ -10,4 +10,5 @@ public interface GameService {
    GameInfo getGameById(int id);
    List<GameInfo> getGameByLeagueId(int id);
    List<GameInfo> getGamesBySearch(String game);
+   String getTweetMessage();
 }
