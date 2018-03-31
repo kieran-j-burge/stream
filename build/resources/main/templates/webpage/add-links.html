@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/data/jaxb">
+<head th:replace="fragments :: head">
+
+</head>
+<body>
+
+<nav th:replace="fragments :: nav">
+
+</nav>
+
+<div class="container-fluid">
+    <div class="container header-title">
+        <h1>Game List</h1>
+    </div>
+</div>
+
+<div class="container search-container">
+    <div class="row">
+        <div id="custom-search-input">
+            <div class="input-group col-md-12">
+                <input id="searchGame" type="text" class="  search-query form-control" placeholder="Search" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="resultsBlock">
+    <div th:replace="fragments :: admin_page_game_list"></div>
+</div>
+
+</body>
+
+<script>
+
+
+    $("#searchGame").on('keyup', function() {
+        var searchText = $('#searchGame').val();
+        var searchLen  = searchText.length;
+
+        if (searchLen >= 1) {
+            url ='/admin/search/' + $('#searchGame').val();
+        }
+        else{
+            url ='/admin/load_home';
+        }
+
+        $("#resultsBlock").load(url);
+    });
+
+</script>
+
+</html>
