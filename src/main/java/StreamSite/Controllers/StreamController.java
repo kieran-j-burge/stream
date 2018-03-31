@@ -34,7 +34,6 @@ public class StreamController {
     @RequestMapping(value = "/stream_page/{id}", method = GET)
     public String retreiveGamesForLeague(Model model, HttpSession session,
                                          @PathVariable("id") int id){
-        adminService.updatePageCount(3);
 
         try {
             model.addAttribute("stream_info", streamService.getStreamById(id));

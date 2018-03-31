@@ -23,7 +23,6 @@ public class HomeController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String getHomePage(Model model, HttpSession session){
-        adminService.updatePageCount(1);
         try {
             model.addAttribute("game_list", gameService.getHomePageGames());
 

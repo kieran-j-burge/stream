@@ -29,7 +29,6 @@ public class GameController {
     @RequestMapping(value = "/game/{id}", method = GET)
     public String retreiveGamePage(Model model, HttpSession session,
                                    @PathVariable("id") int id){
-        adminService.updatePageCount(2);
         try {
             model.addAttribute("game_info", gameService.getGameById(id));
             model.addAttribute("stream_list", streamService.getStreamsByGameId(id));
