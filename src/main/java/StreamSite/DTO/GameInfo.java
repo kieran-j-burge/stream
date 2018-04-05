@@ -20,6 +20,6 @@ public class GameInfo {
     private String homeImg;
     private String awayImg;
     private String ko_time;
-//    private String ko_date;
+    private String ko_time_date;
 
 }

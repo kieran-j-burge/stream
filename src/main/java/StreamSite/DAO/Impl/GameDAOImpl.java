@@ -27,7 +27,7 @@ public class GameDAOImpl implements GameDAO {
     public List<GameInfo> getHomePageGames() {
 
         List<GameInfo> gameInfoList = new ArrayList<>();
-        jdbcTemplate.query("SELECT game.game_id, game.home, game.away, (SELECT `name` FROM clubs WHERE club_id = game.home) AS 'HomeTeam', (SELECT `name` FROM clubs WHERE club_id = game.away) AS ' AwayTeam', (SELECT image from clubs where club_id = game.home) AS 'HomeImg',(SELECT image from clubs where club_id = game.away) AS 'AwayImg', game.ko_time FROM game WHERE visable = 1 ORDER BY ko_time LIMIT 100;",
+        jdbcTemplate.query("SELECT game.game_id, game.home, game.away, CAST(ko_time AS DATE) as ko_time_date , (SELECT `name` FROM clubs WHERE club_id = game.home) AS 'HomeTeam', (SELECT `name` FROM clubs WHERE club_id = game.away) AS ' AwayTeam', (SELECT image from clubs where club_id = game.home) AS 'HomeImg',(SELECT image from clubs where club_id = game.away) AS 'AwayImg', game.ko_time FROM game WHERE visable = 1 ORDER BY ko_time LIMIT 100;",
                 new Object[]{},
                 (rs, rowNum) -> gameInfoList.add(new GameInfo(
                                 rs.getInt("game_id"),
@@ -37,7 +37,8 @@ public class GameDAOImpl implements GameDAO {
                                 rs.getString("AwayTeam"),
                                 rs.getString("HomeImg"),
                                 rs.getString("AwayImg"),
-                                sdf.format(rs.getTime("ko_time")))
+                                sdf.format(rs.getTime("ko_time")),
+                                rs.getString("ko_time_date"))
                 ));
         return gameInfoList;
     }
@@ -45,7 +46,7 @@ public class GameDAOImpl implements GameDAO {
     @Override
     public GameInfo getGameById(int id) {
 
-        return jdbcTemplate.queryForObject("SELECT game.game_id, game.home, game.away, (SELECT `name` FROM clubs WHERE club_id = game.home) AS 'HomeTeam', (SELECT `name` FROM clubs WHERE club_id = game.away) AS ' AwayTeam',(SELECT image from clubs where club_id = game.home) AS 'HomeImg',(SELECT image from clubs where club_id = game.away) AS 'AwayImg', game.ko_time  FROM game WHERE game_id = ? ORDER BY ko_time",
+        return jdbcTemplate.queryForObject("SELECT game.game_id, game.home, game.away, CAST(ko_time AS DATE) as ko_time_date , (SELECT `name` FROM clubs WHERE club_id = game.home) AS 'HomeTeam', (SELECT `name` FROM clubs WHERE club_id = game.away) AS ' AwayTeam',(SELECT image from clubs where club_id = game.home) AS 'HomeImg',(SELECT image from clubs where club_id = game.away) AS 'AwayImg', game.ko_time  FROM game WHERE game_id = ? ORDER BY ko_time",
                 new Object[]{id},
                 (rs, rowNum) -> new GameInfo(
                         rs.getInt("game_id"),
@@ -55,7 +56,8 @@ public class GameDAOImpl implements GameDAO {
                         rs.getString("AwayTeam"),
                         rs.getString("HomeImg"),
                         rs.getString("AwayImg"),
-                        sdf.format(rs.getTime("ko_time"))
+                        sdf.format(rs.getTime("ko_time")),
+                        rs.getString("ko_time_date")
                 ));
 
     }
@@ -63,7 +65,7 @@ public class GameDAOImpl implements GameDAO {
     @Override
     public List<GameInfo> getGameByLeagueId(int id) {
         List<GameInfo> gameInfoList = new ArrayList<>();
-        jdbcTemplate.query("SELECT game.game_id, game.home, game.away, (SELECT `name` FROM clubs WHERE club_id = game.home) AS 'HomeTeam', (SELECT `name` FROM clubs WHERE club_id = game.away) AS ' AwayTeam',(SELECT image from clubs where club_id = game.home) AS 'HomeImg',(SELECT image from clubs where club_id = game.away) AS 'AwayImg', game.ko_time FROM game WHERE `league_id` = ? AND visable = 1 ORDER BY ko_time",
+        jdbcTemplate.query("SELECT game.game_id, game.home, game.away, CAST(ko_time AS DATE) as ko_time_date , (SELECT `name` FROM clubs WHERE club_id = game.home) AS 'HomeTeam', (SELECT `name` FROM clubs WHERE club_id = game.away) AS ' AwayTeam',(SELECT image from clubs where club_id = game.home) AS 'HomeImg',(SELECT image from clubs where club_id = game.away) AS 'AwayImg', game.ko_time FROM game WHERE `league_id` = ? AND visable = 1 ORDER BY ko_time",
                 new Object[]{id},
                 (rs, rowNum) -> gameInfoList.add(new GameInfo(
                         rs.getInt("game_id"),
@@ -73,7 +75,8 @@ public class GameDAOImpl implements GameDAO {
                         rs.getString("AwayTeam"),
                         rs.getString("HomeImg"),
                         rs.getString("AwayImg"),
-                        sdf.format(rs.getTime("ko_time")))
+                        sdf.format(rs.getTime("ko_time")),
+                        rs.getString("ko_time_date"))
 
 
                 ));
@@ -83,7 +86,7 @@ public class GameDAOImpl implements GameDAO {
     @Override
     public List<GameInfo> getGamesBySearch(String game) {
         List<GameInfo> gameSearchList = new ArrayList<>();
-        jdbcTemplate.query("SELECT game.game_id, game.home, game.away, (SELECT `name` FROM clubs WHERE club_id = game.home) AS 'HomeTeam', (SELECT `name` FROM clubs WHERE club_id = game.away) AS ' AwayTeam',(SELECT image from clubs where club_id = game.home) AS 'HomeImg',(SELECT image from clubs where club_id = game.away) AS 'AwayImg', game.ko_time FROM game WHERE visable = 1 AND home IN (SELECT club_id from clubs where name like ? ) OR away IN (SELECT club_id from clubs where name like ?) AND visable = 1 ORDER BY ko_time",
+        jdbcTemplate.query("SELECT game.game_id, game.home, game.away, CAST(ko_time AS DATE) as ko_time_date , (SELECT `name` FROM clubs WHERE club_id = game.home) AS 'HomeTeam', (SELECT `name` FROM clubs WHERE club_id = game.away) AS ' AwayTeam',(SELECT image from clubs where club_id = game.home) AS 'HomeImg',(SELECT image from clubs where club_id = game.away) AS 'AwayImg', game.ko_time FROM game WHERE visable = 1 AND home IN (SELECT club_id from clubs where name like ? ) OR away IN (SELECT club_id from clubs where name like ?) AND visable = 1 ORDER BY ko_time",
                 new Object[]{game,game},
                 (rs, rowNum) -> gameSearchList.add(new GameInfo(
                         rs.getInt("game_id"),
@@ -93,7 +96,8 @@ public class GameDAOImpl implements GameDAO {
                         rs.getString("AwayTeam"),
                         rs.getString("HomeImg"),
                         rs.getString("AwayImg"),
-                        sdf.format(rs.getTime("ko_time")))
+                        sdf.format(rs.getTime("ko_time")),
+                        rs.getString("ko_time_date"))
                 ));
         return gameSearchList;
     }
@@ -101,7 +105,7 @@ public class GameDAOImpl implements GameDAO {
     @Override
     public List<GameInfo> getGamesBySearchByLeague(String game, int id) {
         List<GameInfo> gameSearchList = new ArrayList<>();
-        jdbcTemplate.query("SELECT game.game_id, game.home, game.away,visable, (SELECT `name` FROM clubs WHERE club_id = game.home) AS 'HomeTeam', (SELECT `name` FROM clubs WHERE club_id = game.away) AS ' AwayTeam',(SELECT image from clubs where club_id = game.home) AS 'HomeImg',(SELECT image from clubs where club_id = game.away) AS 'AwayImg', game.ko_time FROM game WHERE visable = 1 AND league_id =? AND  home IN (SELECT club_id from clubs where name like ? ) OR  visable = 1 AND league_id =1 AND away IN (SELECT club_id from clubs where name like ?) ORDER BY ko_time;",
+        jdbcTemplate.query("SELECT game.game_id, game.home, game.away, CAST(ko_time AS DATE) as ko_time_date , (SELECT `name` FROM clubs WHERE club_id = game.home) AS 'HomeTeam', (SELECT `name` FROM clubs WHERE club_id = game.away) AS ' AwayTeam',(SELECT image from clubs where club_id = game.home) AS 'HomeImg',(SELECT image from clubs where club_id = game.away) AS 'AwayImg', game.ko_time FROM game WHERE visable = 1 AND league_id =? AND  home IN (SELECT club_id from clubs where name like ? ) OR  visable = 1 AND league_id =1 AND away IN (SELECT club_id from clubs where name like ?) ORDER BY ko_time;",
                 new Object[]{id,game,game},
                 (rs, rowNum) -> gameSearchList.add(new GameInfo(
                         rs.getInt("game_id"),
@@ -111,7 +115,8 @@ public class GameDAOImpl implements GameDAO {
                         rs.getString("AwayTeam"),
                         rs.getString("HomeImg"),
                         rs.getString("AwayImg"),
-                        sdf.format(rs.getTime("ko_time")))
+                        sdf.format(rs.getTime("ko_time")),
+                        rs.getString("ko_time_date"))
                 ));
         return gameSearchList;
     }
@@ -119,7 +124,7 @@ public class GameDAOImpl implements GameDAO {
     @Override
     public List<GameInfo> getGameHistory() {
         List<GameInfo> gameInfoList = new ArrayList<>();
-        jdbcTemplate.query("SELECT game.game_id, game.home, game.away, (SELECT `name` FROM clubs WHERE club_id = game.home) AS 'HomeTeam', (SELECT `name` FROM clubs WHERE club_id = game.away) AS ' AwayTeam', (SELECT image from clubs where club_id = game.home) AS 'HomeImg',(SELECT image from clubs where club_id = game.away) AS 'AwayImg', game.ko_time FROM game ORDER BY ko_time;",
+        jdbcTemplate.query("SELECT game.game_id, game.home, game.away, CAST(ko_time AS DATE) as ko_time_date , (SELECT `name` FROM clubs WHERE club_id = game.home) AS 'HomeTeam', (SELECT `name` FROM clubs WHERE club_id = game.away) AS ' AwayTeam', (SELECT image from clubs where club_id = game.home) AS 'HomeImg',(SELECT image from clubs where club_id = game.away) AS 'AwayImg', game.ko_time FROM game ORDER BY ko_time;",
                 new Object[]{},
                 (rs, rowNum) -> gameInfoList.add(new GameInfo(
                         rs.getInt("game_id"),
@@ -129,14 +134,15 @@ public class GameDAOImpl implements GameDAO {
                         rs.getString("AwayTeam"),
                         rs.getString("HomeImg"),
                         rs.getString("AwayImg"),
-                        sdf.format(rs.getTime("ko_time")))
+                        sdf.format(rs.getTime("ko_time")),
+                        rs.getString("ko_time_date"))
                 ));
         return gameInfoList;
     }
 
     @Override
     public TweetInfo getTweetMessage() {
-        return jdbcTemplate.queryForObject("SELECT game.game_id, game.home, game.away, (SELECT `name` FROM clubs WHERE club_id = game.home) AS 'HomeTeam', (SELECT `name` FROM clubs WHERE club_id = game.away) AS ' AwayTeam', game.ko_time, date(game.ko_time) AS game_date FROM game ORDER BY RAND() LIMIT 1",
+        return jdbcTemplate.queryForObject("SELECT game.game_id, game.home, game.away, CAST(ko_time AS DATE) as ko_time_date , (SELECT `name` FROM clubs WHERE club_id = game.home) AS 'HomeTeam', (SELECT `name` FROM clubs WHERE club_id = game.away) AS ' AwayTeam', game.ko_time, date(game.ko_time) AS game_date FROM game ORDER BY RAND() LIMIT 1",
                 new Object[]{},
                 (rs, rowNum) -> new TweetInfo(
                         rs.getString("HomeTeam"),
@@ -148,7 +154,7 @@ public class GameDAOImpl implements GameDAO {
     @Override
     public List<GameInfo> getHomePageGamesShort() {
         List<GameInfo> gameInfoList = new ArrayList<>();
-        jdbcTemplate.query("SELECT game.game_id, game.home, game.away, (SELECT `name` FROM clubs WHERE club_id = game.home) AS 'HomeTeam', (SELECT `name` FROM clubs WHERE club_id = game.away) AS ' AwayTeam', (SELECT image from clubs where club_id = game.home) AS 'HomeImg',(SELECT image from clubs where club_id = game.away) AS 'AwayImg', game.ko_time FROM game WHERE visable = 1 ORDER BY ko_time LIMIT 10;",
+        jdbcTemplate.query("SELECT game.game_id, game.home, game.away, CAST(ko_time AS DATE) as ko_time_date , (SELECT `name` FROM clubs WHERE club_id = game.home) AS 'HomeTeam', (SELECT `name` FROM clubs WHERE club_id = game.away) AS ' AwayTeam', (SELECT image from clubs where club_id = game.home) AS 'HomeImg',(SELECT image from clubs where club_id = game.away) AS 'AwayImg', game.ko_time FROM game WHERE visable = 1 ORDER BY ko_time LIMIT 10;",
                 new Object[]{},
                 (rs, rowNum) -> gameInfoList.add(new GameInfo(
                         rs.getInt("game_id"),
@@ -158,7 +164,8 @@ public class GameDAOImpl implements GameDAO {
                         rs.getString("AwayTeam"),
                         rs.getString("HomeImg"),
                         rs.getString("AwayImg"),
-                        sdf.format(rs.getTime("ko_time")))
+                        sdf.format(rs.getTime("ko_time")),
+                        rs.getString("ko_time_date"))
                 ));
         return gameInfoList;
     }

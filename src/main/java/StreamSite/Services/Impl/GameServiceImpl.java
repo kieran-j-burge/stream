@@ -23,12 +23,12 @@ public class GameServiceImpl implements GameService {
     @Override
     public List<GameInfo> getHomePageGames() {
 
-        return gameDAO.getHomePageGames();
+        return splitDate(gameDAO.getHomePageGames());
     }
 
     @Override
     public List<GameInfo> getHomePageGamesShort() {
-        return gameDAO.getHomePageGamesShort();
+        return splitDate(gameDAO.getHomePageGamesShort());
     }
 
     @Override
@@ -38,13 +38,13 @@ public class GameServiceImpl implements GameService {
 
     @Override
     public List<GameInfo> getGameByLeagueId(int id) {
-        return gameDAO.getGameByLeagueId(id);
+        return splitDate(gameDAO.getGameByLeagueId(id));
     }
 
     @Override
     public List<GameInfo> getGamesBySearch(String game) {
         game = "%"+game+"%";
-        return gameDAO.getGamesBySearch(game);
+        return splitDate(gameDAO.getGamesBySearch(game));
     }
 
     @Override
@@ -57,12 +57,21 @@ public class GameServiceImpl implements GameService {
     @Override
     public List<GameInfo> getGamesBySearchByLeague(String game, int id) {
         game = "%"+game+"%";
-        return gameDAO.getGamesBySearchByLeague(game,id);
+        return splitDate(gameDAO.getGamesBySearchByLeague(game,id));
     }
 
     @Override
     public List<GameInfo> getGameHistory() {
-        return gameDAO.getGameHistory();
+        return splitDate(gameDAO.getGameHistory());
+    }
+
+    private List<GameInfo> splitDate(List<GameInfo> games){
+
+        for (GameInfo game : games){
+            game.setKo_time_date(game.getKo_time_date().substring(5).replaceAll("-","/"));
+        }
+
+        return games;
     }
 
 
