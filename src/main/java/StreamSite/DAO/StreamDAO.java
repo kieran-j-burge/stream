@@ -12,4 +12,5 @@ public interface StreamDAO {
     String voteUp(int game,int stream);
     Stream getStreamById(int id);
     List<Channel> getStreamChannel(int id);
+    List<Stream> getGenStreamsByGameId(int id);
 }

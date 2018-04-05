@@ -1,7 +1,39 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.springframework.org/schema/data/jaxb">
-<head th:replace="fragments :: head">
+<head >
+    <meta http-equiv="Content-Type" content="text/html;" charset="UTF-8"/>
+    <META NAME="ROBOTS" CONTENT="INDEX, FOLLOW"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="theme-color" content="#353535"/>
+    <meta name="keywords" th:content="'CleanStreams, live streams, free live streams, live football games streams, football free streams, sports free streams,' + ${game_info.home}+' vs '+${game_info.away}+' live stream' "/>
+    <meta name="description" content="CleanStream - Find all the free live streams for your selected football game | Premier League, Bundasliga, Liga Santander, Serie A and many more!"/>
+    <title th:text="'Clean Streams|' + ${game_info.home} +' vs ' + ${game_info.away}"></title>
+    <link rel="stylesheet" media="all" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel='shortcut icon' type='image/x-icon' href='/images/misc/icon.png' />
+    <script  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script  src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script  src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
+    <script  th:src="@{/css/js/jquery.js}" src="../static/css/js/jquery.js"></script>
+    <!--<script  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>-->
+    <link rel="manifest" href="/css/json/manifest.json"/>
 
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" media="all" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+    <!-- Optional theme -->
+    <link rel="stylesheet" media="all" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"/>
+    <!-- Latest compiled and minified JavaScript -->
+    <script  src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" media="all" th:href="@{/css/master.css}" href="/static/css/master.css"/>
+    <!--<link rel="stylesheet" th:href="@{/css/css/bootstrap.css}" href="/static/css/css/bootstrap.min.css"/>-->
+    <script  src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
+
+    <!--<script>-->
+    <!--(adsbygoogle = window.adsbygoogle || []).push({-->
+    <!--google_ad_client: "ca-pub-5981371367764735",-->
+    <!--enable_page_level_ads: true-->
+    <!--});-->
+    <!--</script>-->
 </head>
 <body>
 
@@ -22,52 +54,9 @@
     </div>
 </div>
 
-<div class="container-fluid game-header-container">
-    <div class="container">
-        <div class="row game-page-info">
-
-            <div class="row game-ko-time">
-                <h1 th:text="'KO Time: ' + ${game_info.ko_time}"></h1>
-            </div>
-
-            <div class="row game-title">
-
-                <div class="col-md-5 game-title">
-                    <div class="game-info-positioner">
-                            <span>
-                                <img th:src="@{'/images/badges/'+ ${game_info.homeImg}} + '.svg'" onerror="this.src='/images/badges/999.svg'"></img>
-                            </span>
-                            <span>
-                                <p th:text="${game_info.home}"></p>
-                            </span>
-                    </div>
-                </div>
-
-                <div class="col-md-2 game-title">
-                    <div class="game-info-positioner">
-                        <span>
-                            <p>  vs  </p>
-                        </span>
-                    </div>
-                </div>
-
-                <div  class="col-md-5 game-title">
-                    <div class="game-info-positioner">
-                            <span>
-                                <p th:text="${game_info.away}"></p>
-                            </span>
-                            <span>
-                                <img th:src="@{'/images/badges/'+ ${game_info.awayImg}} + '.svg'" onerror="this.src='/images/badges/999.svg'"></img>
-                            </span>
-                    </div>
-                </div>
-
-            </div>
+<div th:replace="fragments :: game-info-frag"></div>
 
 
-        </div>
-    </div>
-</div>
 
 <div id="response-message-container">
     <div id="response-message">
@@ -75,15 +64,27 @@
     </div>
 </div>
 
+
+
+
 <div class="container-fluid link-list-container">
     <div class="container header-title">
-        <h1>Link List</h1>
+        <h1>Specific Stream Lists</h1>
     </div>
 </div>
 
 
-
 <div th:replace="fragments :: stream_list">
+
+</div>
+
+<div class="container-fluid link-list-container">
+    <div class="container header-title">
+        <h1>Generic Streaming Lists</h1>
+    </div>
+</div>
+
+<div th:replace="fragments :: gen_stream_list">
 
 </div>
 

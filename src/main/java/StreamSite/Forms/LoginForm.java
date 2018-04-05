@@ -1,4 +1,4 @@
-package summit.Forms;
+package StreamSite.Forms;
 
 import lombok.Data;
 

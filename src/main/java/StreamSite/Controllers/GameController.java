@@ -25,6 +25,20 @@ public class GameController {
         this.adminService = adminService;
     }
 
+    @RequestMapping(value = "/game_list", method = RequestMethod.GET)
+    public String getHomePage(Model model, HttpSession session){
+        try {
+            model.addAttribute("game_list", gameService.getHomePageGames());
+
+            return "webpage/game_list";
+
+        } catch (Exception e){
+
+            return "webpage/error_page";
+        }
+
+    }
+
 
     @RequestMapping(value = "/game/{id}", method = GET)
     public String retreiveGamePage(Model model, HttpSession session,
@@ -32,6 +46,7 @@ public class GameController {
         try {
             model.addAttribute("game_info", gameService.getGameById(id));
             model.addAttribute("stream_list", streamService.getStreamsByGameId(id));
+            model.addAttribute("gen_stream_list", streamService.getGenStreamsByGameId(id));
 
             return "webpage/game";
 
@@ -43,7 +58,7 @@ public class GameController {
     }
 
     @RequestMapping(value = "/search/{game}", method = GET)
-    public String retreiveGamePage(Model model, HttpSession session,
+    public String searchGame(Model model, HttpSession session,
                                    @PathVariable("game") String game){
 
         try {
@@ -55,6 +70,39 @@ public class GameController {
 
             return "webpage/error_page";
         }
+
+
+    }
+
+    @RequestMapping(value = "/search/{game}/{id}", method = GET)
+    public String searchByLeague(Model model, HttpSession session,
+                                   @PathVariable("game") String game,@PathVariable("id") int id){
+
+        try {
+            model.addAttribute("game_list", gameService.getGamesBySearchByLeague(game,id));
+
+            return "fragments :: game_list";
+
+        } catch (Exception e){
+
+            return "webpage/error_page";
+        }
+
+
+    }
+
+    @RequestMapping(value = "/load_home/{id}", method = GET)
+    public String retreiveHomeGames(Model model, HttpSession session,@PathVariable("id") int id){
+        try {
+
+            model.addAttribute("game_list", gameService.getGameByLeagueId(id));
+            return "fragments :: game_list";
+
+        } catch (Exception e){
+
+            return "webpage/error_page";
+        }
+
 
 
     }
@@ -109,6 +157,19 @@ public class GameController {
 
     }
 
+    @RequestMapping(value = "/history", method = RequestMethod.GET)
+    public String getHistoryPage(Model model, HttpSession session){
+        try {
+            model.addAttribute("game_list", gameService.getGameHistory());
+
+            return "webpage/history";
+
+        } catch (Exception e){
+
+            return "webpage/error_page";
+        }
+
+    }
 
 
 }

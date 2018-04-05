@@ -49,9 +49,9 @@ public class LeagueController {
 
         try {
             model.addAttribute("game_list", gameService.getGameByLeagueId(id));
+            model.addAttribute("league_info",leagueService.getLeagueById(id));
 
-
-            return "webpage/game_list";
+            return "webpage/game_list_league";
 
         } catch (Exception e){
 

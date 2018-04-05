@@ -12,10 +12,7 @@ public class Account {
     private Integer id;
     private String email;
     private String password;
+    private Integer permissions;
 
-    public Account(Integer id, String email, String password, Integer fkType) {
-        this.id = id;
-        this.email = email;
-        this.password = password;
-    }
+
 }

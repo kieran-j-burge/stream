@@ -20,11 +20,10 @@ public class HomeController {
         this.gameService = gameService;
     }
 
-
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String getHomePage(Model model, HttpSession session){
         try {
-            model.addAttribute("game_list", gameService.getHomePageGames());
+            model.addAttribute("game_list", gameService.getHomePageGamesShort());
 
             return "webpage/home";
 
@@ -34,6 +33,8 @@ public class HomeController {
         }
 
     }
+
+
 
 
 }

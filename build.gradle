@@ -25,8 +25,7 @@ repositories {
 
 dependencies {
 
-        compile("org.springframework.boot:spring-boot-devtools")
-
+    compile("org.springframework.boot:spring-boot-devtools")
     compile("org.springframework.boot:spring-boot-starter-thymeleaf")
     compile('org.springframework.boot:spring-boot-starter-jdbc')
     compile("org.springframework.boot:spring-boot-starter-mail")
@@ -42,6 +41,7 @@ dependencies {
 bootRun {
     addResources = true
 }
+
 
 jar {
     manifest {

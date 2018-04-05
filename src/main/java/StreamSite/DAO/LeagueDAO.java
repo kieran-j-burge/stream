@@ -8,4 +8,5 @@ public interface LeagueDAO {
     List<League> getLeagueList();
     List<League> getLeaguesBySearch(String league);
     List<League> getHomePageGames();
+    League getLeagueById(int id);
 }

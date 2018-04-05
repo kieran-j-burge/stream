@@ -12,3 +12,4 @@ public class StreamingSiteApp {
         SpringApplication.run(StreamingSiteApp.class, args);
     }
 }
+

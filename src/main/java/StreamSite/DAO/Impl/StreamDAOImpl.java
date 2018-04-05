@@ -71,4 +71,19 @@ public class StreamDAOImpl implements StreamDAO {
                 ));
         return channelList;
     }
+
+    @Override
+    public List<Stream> getGenStreamsByGameId(int id) {
+        List<Stream> streamList = new ArrayList<>();
+        jdbcTemplate.query("SELECT  * from gen_streams where gen_stream_id in (Select gen_stream_id from gen_cat_gen_stream where gen_stream_cat_id = (select generic_stream_id from generic_stream_cat where league_id = (SELECT league_id from leagues where league_id = (SELECT league_id from game where game_id = ?)))); ",
+                new Object[]{id},
+                (rs, rowNum) -> streamList.add(new Stream(
+                        rs.getInt("gen_stream_id"),
+                        rs.getString("url"),
+                        rs.getInt("vote"))
+
+
+                ));
+        return streamList;
+    }
 }

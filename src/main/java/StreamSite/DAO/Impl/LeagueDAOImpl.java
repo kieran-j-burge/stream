@@ -4,6 +4,7 @@ package StreamSite.DAO.Impl;
 import StreamSite.DAO.LeagueDAO;
 import StreamSite.DTO.GameInfo;
 import StreamSite.DTO.League;
+import StreamSite.DTO.TweetInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -61,5 +62,16 @@ public class LeagueDAOImpl implements LeagueDAO {
                         rs.getString("img"))
                 ));
         return leagueList;
+    }
+
+    @Override
+    public League getLeagueById(int id) {
+        return jdbcTemplate.queryForObject("SELECT league_id,name,img FROM leagues WHERE league_id =? ",
+                new Object[]{id},
+                (rs, rowNum) -> new League(
+                        rs.getInt("league_id"),
+                        rs.getString("name"),
+                        rs.getString("img"))
+                );
     }
 }

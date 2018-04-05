@@ -13,4 +13,7 @@ public interface GameDAO {
     List<GameInfo> getGameByLeagueId(int id);
     List<GameInfo> getGamesBySearch(String game);
     TweetInfo getTweetMessage();
+    List<GameInfo> getHomePageGamesShort();
+    List<GameInfo> getGamesBySearchByLeague(String game, int id);
+    List<GameInfo> getGameHistory();
 }

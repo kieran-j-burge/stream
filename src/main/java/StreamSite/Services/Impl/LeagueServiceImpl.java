@@ -39,5 +39,10 @@ public class LeagueServiceImpl implements LeagueService {
         return leagueDAO.getHomePageGames();
     }
 
+    @Override
+    public League getLeagueById(int id) {
+        return leagueDAO.getLeagueById(id);
+    }
+
 
 }
