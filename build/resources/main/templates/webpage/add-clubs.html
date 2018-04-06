@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/data/jaxb">
+<head th:replace="fragments :: head">
+
+</head>
+<body>
+
+<nav th:replace="fragments :: nav">
+
+</nav>
+
+<!--<div class="container-fluid">-->
+    <!--<div class="container">-->
+        <!--<div class="row">-->
+            <!--<input id="name" value="enter Club"/>-->
+            <!--<input id="LeagueID" value="Enter League "/>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+
+<div class="container">
+    <div class="row">
+        <h2>Add Clubs</h2>
+    </div>
+    <div class="row form-group">
+        <div class="input-group">
+            <input type="text" class="form-control club-name-input" placeholder="Club Name"/>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="input-group">
+            <input type="text" class="form-control club-img-input" placeholder="Image"/>
+        </div>
+    </div>
+    <a class="btn btn-info btn-lg add-club-btn">
+         Add Clubs
+    </a>
+</div>
+
+</body>
+
+
+</html>
