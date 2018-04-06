@@ -15,7 +15,13 @@
     <script  src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script  src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
     <script  th:src="@{/css/js/jquery.js}" src="../static/css/js/jquery.js"></script>
-    <!--<script  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>-->
+
+    <!--proppella ads-->
+    <script src="//luckypushh.com/ntfc.php?p=1630788" data-cfasync="false" async="async"></script>
+    <script type="text/javascript" src="//go.oclaserver.com/apu.php?zoneid=1630789"></script>
+    <script async="async" type="text/javascript" src="//go.mobisla.com/notice.php?p=1630791&amp;interactive=1&amp;pushup=1"></script>
+
+    <script  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <link rel="manifest" href="/css/json/manifest.json"/>
 
     <!-- Latest compiled and minified CSS -->
@@ -37,6 +43,10 @@
     <!--</script>-->
 </head>
 <body>
+
+
+
+
 
 <nav th:replace="fragments :: nav">
 
@@ -86,13 +96,12 @@
 
 </body>
 
-<script>
+<script data-cfasync="false" type="text/javascript">
     if('serviceWorker' in navigator) {
     navigator.serviceWorker
     .register('/css/js/sw.js')
     .then(function() { console.log("Service Worker Registered"); });
     }
+
 </script>
-
-
 </html>
