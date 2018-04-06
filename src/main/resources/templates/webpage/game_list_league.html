@@ -16,7 +16,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta name="theme-color" content="#353535"/>
     <meta name="keywords" th:content="'CleanStreams, live streams, free live streams, football games live stream, live football games streams, football free streams, sports free streams,' + ${league_info.name}"/>
-    <meta name="description" content="'CleanStream - Have a look at all the upcoming games and find a free live stream in the ' + ${league_info.name}"/>
+    <meta name="description" th:content="'CleanStream - Have a look at all the upcoming games and find a free live stream in the ' + ${league_info.name}"/>
     <title th:text="'Clean Streams|'+${league_info.name}"></title>
     <link rel="stylesheet" media="all" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel='shortcut icon' type='image/x-icon' href='/images/misc/icon.png' />

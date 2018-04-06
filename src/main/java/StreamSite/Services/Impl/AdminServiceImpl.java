@@ -66,4 +66,6 @@ public class AdminServiceImpl implements AdminService {
     public void postFeedback(String msg) {
         adminDAO.postFeedback(msg);
     }
+
+
 }

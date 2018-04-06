@@ -32,19 +32,36 @@ public class StreamController {
     }
 
     @RequestMapping(value = "/stream_page/{id}", method = GET)
-    public String retreiveGamesForLeague(Model model, HttpSession session,
+    public String getStream(Model model, HttpSession session,
                                          @PathVariable("id") int id){
 
-        try {
+//        try {
             model.addAttribute("stream_info", streamService.getStreamById(id));
             model.addAttribute("channel_list", streamService.getStreamChannel(id));
 
             return "webpage/stream_page";
 
-        } catch (Exception e){
+//        } catch (Exception e){
 
-            return "webpage/error_page";
-        }
+//            return "webpage/error_page";
+//        }
+
+    }
+
+    @RequestMapping(value = "/gen_stream_page/{id}", method = GET)
+    public String getGenStream(Model model, HttpSession session,
+                                         @PathVariable("id") int id){
+
+//        try {
+        model.addAttribute("stream_info", streamService.getGenStreamById(id));
+        model.addAttribute("channel_list", streamService.getStreamChannel(id));
+
+        return "webpage/stream_page";
+
+//        } catch (Exception e){
+
+//            return "webpage/error_page";
+//        }
 
     }
 

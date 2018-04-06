@@ -68,13 +68,13 @@
 
 <body>
 
-    <nav th:fragement="nav" class="navbar navbar-inverse">
+    <nav th:fragement="nav" class="navbar navbar-inverse" id="nav-bar">
         <div class="container-fluid">
             <div class="navbar-header">
                 <a class="navbar-brand" href="/">CleanStreams</a>
             </div>
             <ul class="nav navbar-nav">
-                <li class="active"><a href="/">Home</a></li>
+                <li><a href="/">Home</a></li>
                 <li><a href="/game_list">Game List</a></li>
                 <li><a href="/leagues">Leagues</a></li>
                 <li class="dropdown">
@@ -93,6 +93,9 @@
                 <li th:if="${account != null AND account.permissions == 1}"><a href="/admin/add-clubs">Add Clubs</a></li>
                 <li th:if="${account != null AND account.permissions == 1}"><a href="/admin/add-links">Add Links</a></li>
                 <li th:if="${account != null AND account.permissions == 1}"><a href="/admin/remove-games">Remove Games</a></li>
+                <li th:if="${account != null AND account.permissions == 1}"><a href="/admin/alter-club">Alter Club</a></li>
+                <li th:if="${account != null AND account.permissions == 1}"><a href="/admin/alter-game">Alter Game</a></li>
+
             </ul>
 
 
@@ -265,13 +268,13 @@
                 <th:block th:if="${gen_stream_list != null}" th:each="stream,status : ${gen_stream_list}">
                     <div class="row stream-info-holder">
                         <div id="genStreamId" class="col-sm-1">
-                            <a th:href="@{'/stream_page/' + ${stream.stream_id}}">
+                            <a th:href="@{'/gen_stream_page/' + ${stream.stream_id}}">
                                 <p class="streamId-hide" th:text="${stream.stream_id}"></p>
                                 <i class="fa fa-tv" style="font-size:36px"></i>
                             </a>
                         </div>
                         <div  class="col-sm-5">
-                            <a th:href="@{'/stream_page/' + ${stream.stream_id}}">
+                            <a th:href="@{'/gen_stream_page/' + ${stream.stream_id}}">
                                 <p th:text="${stream.url}"></p>
                             </a>
                         </div>
@@ -308,6 +311,23 @@
     <div th:fragment="game_list">
         <div class="container-fluid">
             <div class="container">
+                <div class="row table-titles">
+                    <div class="col-sm-1">
+                        <p>K.O</p>
+                    </div>
+                    <div class="col-sm-4">
+                        <p>Home</p>
+                    </div>
+                    <div class="col-sm-2">
+
+                    </div>
+                    <div class="col-sm-4">
+                        <p>Away</p>
+                    </div>
+                    <div class="col-sm-1">
+                        <p>Date</p>
+                    </div>
+                </div>
                 <th:block th:each="game : ${game_list}">
                     <div class="row game-info-holder">
                         <a th:href="@{'/game/' + ${game.game_id}}">
@@ -719,9 +739,7 @@
                         <div class="link-area">
                             <h3>ABOUT US</h3>
                             <P>Clean Streams is a dictionary for free live football streams. Developed by WebDevK</P>
-                            <li class="fa-li"><a href="/"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                            <li class="fa-li"><a href="/"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                            <li class="fa-li"><a href="/"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -747,6 +765,31 @@
             </div>
         </section>
 
+    </div>
+
+
+    <div th:fragment="admin_page_club_list">
+        <div class="container-fluid">
+            <div class="container">
+                <th:block th:each="club : ${club_list}">
+                    <div class="row game-info-holder">
+                        <a th:href="@{'/admin/club/' + ${club.club_id}}">
+                            <div  class="col-sm-1">
+                                <p th:text="${club.club_id}"></p>
+                            </div>
+                            <div  class="col-sm-11 game-title">
+                                <span>
+                                    <img th:src="@{'/images/badges/'+ ${club.img}} + '.svg'" onerror="this.src='/images/badges/999.svg'"></img>
+                                </span>
+                                <span>
+                                    <p th:text="${club.name}"></p>
+                                </span>
+                            </div>
+                        </a>
+                    </div>
+                </th:block>
+            </div>
+        </div>
     </div>
 
 

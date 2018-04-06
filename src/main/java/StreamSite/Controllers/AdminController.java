@@ -217,6 +217,9 @@ public class AdminController {
 
     }
 
+
+
+
     @RequestMapping(value = "/search/club/{club}", method = GET)
     public String searchClubs(Model model, HttpSession session, @PathVariable("club") String club
             ){
@@ -283,6 +286,8 @@ public class AdminController {
 
 
     }
+
+
 
 
 }

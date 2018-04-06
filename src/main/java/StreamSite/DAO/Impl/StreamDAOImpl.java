@@ -60,6 +60,17 @@ public class StreamDAOImpl implements StreamDAO {
     }
 
     @Override
+    public Stream getGenStreamById(int id) {
+        return jdbcTemplate.queryForObject("SELECT * FROM `gen_streams` WHERE `gen_stream_id` = ?; ",
+                new Object[]{id},
+                (rs, rowNum) -> new Stream(
+                        rs.getInt("gen_stream_id"),
+                        rs.getString("url"),
+                        rs.getInt("vote"))
+        );
+    }
+
+    @Override
     public List<Channel> getStreamChannel(int id) {
         List<Channel> channelList = new ArrayList<>();
         jdbcTemplate.query("SELECT `img` FROM `channel` WHERE channel_id IN (SELECT `channel_id` FROM `stream_channel` WHERE `stream_id` = ?); ",

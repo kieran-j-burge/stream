@@ -19,5 +19,4 @@ public interface AdminDAO {
     void  removeGameById(int gameId);
     void addStreamToGame(int gameId,String link);
     void postFeedback(String msg);
-
 }

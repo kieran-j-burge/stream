@@ -51,5 +51,10 @@ public class StreamServiceImpl implements StreamService {
         return streamDAO.getGenStreamsByGameId(id);
     }
 
+    @Override
+    public Stream getGenStreamById(int id) {
+        return streamDAO.getGenStreamById(id);
+    }
+
 
 }

@@ -40,7 +40,8 @@ public class AdminDAOImpl implements AdminDAO {
                 new Object[]{club},
                 (rs, rowNum) -> clubSearchList.add(new Club(
                         rs.getInt("club_id"),
-                        rs.getString("name"))
+                        rs.getString("name"),
+                        rs.getString("img"))
                 ));
         return clubSearchList;
     }
@@ -79,4 +80,6 @@ public class AdminDAOImpl implements AdminDAO {
     public void postFeedback(String msg) {
         jdbcTemplate.update("INSERT INTO feedback (message) VALUES (?) ",msg);
     }
+
+
 }

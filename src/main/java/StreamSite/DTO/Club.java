@@ -12,5 +12,6 @@ public class Club {
 
     private int club_id;
     private String name;
+    private String img;
 
 }

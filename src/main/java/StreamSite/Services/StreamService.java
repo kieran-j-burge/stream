@@ -12,4 +12,5 @@ public interface StreamService {
     Stream getStreamById(int id);
     List<Channel> getStreamChannel(int id);
     List<Stream> getGenStreamsByGameId(int id);
+    Stream getGenStreamById(int id);
 }

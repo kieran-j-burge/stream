@@ -28,6 +28,18 @@ $(document).ready(function () {
 
     })
 
+    $('.alter-club-btn').on('click', function () {
+        var club = $('.club-name-alter-input').val();
+        var img = $('.club-img-alter-input').val();
+
+        url = "/admin/alter-club/" + club + "/" + img;
+
+        $.post(url, function (data, status) {
+            alert("Club added")
+        });
+
+    })
+
     $("#searchGame").on('keyup', function() {
         var searchText = $('#searchGame').val();
         var searchLen  = searchText.length;
