@@ -33,7 +33,7 @@ public class twitter {
         }
     }
 
-    
+
     @Scheduled(cron="0 */10 * * * *")
     public void doVisabilityCheck() {
         try {

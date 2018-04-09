@@ -29,10 +29,10 @@ public class AdminServiceImpl implements AdminService {
 
     private AdminDAO adminDAO;
     private GameDAO gameDAO;
-    private String consumerKey = "Hyz9sN8QzIbXvcL2wzD1hAji6";
-    private String consumerSecret = "bwrPBRGYvdiBdkcTmzfKGpBD2fw0Ku2YUtdb325MEorINfzrbB";
-    private String accessToken = "982670710798802944-uxTjNPO04kOiiNL3HZXlPdQ3XXjgHlP";
-    private String accessSecret = "Jje0qM0FYWCWnifDahYS9QG3nLt10AatxbZNnanV97NJ2";
+    private String consumerKey = "sddl6FJB9yfCIAOuXkjRapgzl";
+    private String consumerSecret = "71hxklzhPszVK8NBFKk9KH7VY056QxFZjxd1zh6fqLhh0VI3df";
+    private String accessToken = "983416989329842177-XjHTYrNED5Zp6UfR0DOJJWPKVqiOV1D";
+    private String accessSecret = "kcl6LW0dvCHVwAaxRJVAiZ3jYBjm9euXKqApRnq3rVuFe";
 
     Random rand = new Random();
 
