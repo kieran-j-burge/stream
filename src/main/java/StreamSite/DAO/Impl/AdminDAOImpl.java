@@ -39,12 +39,12 @@ public class AdminDAOImpl implements AdminDAO {
     @Override
     public List<Club> searchForClub(String club) {
         List<Club> clubSearchList = new ArrayList<>();
-        jdbcTemplate.query("SELECT club_id, name from clubs where name like ?",
+        jdbcTemplate.query("SELECT club_id, name, image from clubs where name like ?",
                 new Object[]{club},
                 (rs, rowNum) -> clubSearchList.add(new Club(
                         rs.getInt("club_id"),
                         rs.getString("name"),
-                        rs.getString("img"))
+                        rs.getString("image"))
                 ));
         return clubSearchList;
     }
