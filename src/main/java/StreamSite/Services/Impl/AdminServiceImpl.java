@@ -143,7 +143,7 @@ public class AdminServiceImpl implements AdminService {
                 performThirtyMinuteTweet(getThirtyMinuteTweet(game.getGame_id()));
             }
 
-            else if (difference <=-50 && difference > -60){
+            else if (difference <=-55 && difference > -60){
                 System.out.println("Im in the half time tweet with a difference of - " +difference);
                 performHTTweet(getHTTweet(game.getGame_id()));
             }
