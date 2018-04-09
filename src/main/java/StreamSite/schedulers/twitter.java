@@ -23,7 +23,7 @@ public class twitter {
     }
 
 
-    @Scheduled(cron="* */5 * * * *")
+    @Scheduled(cron="0 */5 * * * *")
     public void doTweet() {
         try {
             adminService.checkForTweet();
@@ -33,8 +33,8 @@ public class twitter {
         }
     }
 
-
-    @Scheduled(cron="* */10 * * * *")
+    
+    @Scheduled(cron="0 */10 * * * *")
     public void doVisabilityCheck() {
         try {
             adminService.hideFinishedGames();

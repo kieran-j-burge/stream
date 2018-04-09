@@ -98,9 +98,9 @@ public class AdminServiceImpl implements AdminService {
 
 
         List<GameInfoShort> GameList = adminDAO.getGamesForVisCheck();
-
+        System.out.println("Im doing HIDE FINISHED GAMES");
+        System.out.println(GameList.size());
         for (GameInfoShort game : GameList){
-
             System.out.println(game.getKo_time_date());
 
             int difference = hoursDifference(game.getKo_time_date(),timestamp);
@@ -111,8 +111,6 @@ public class AdminServiceImpl implements AdminService {
             }
 
         }
-
-
     }
 
     @Override
@@ -122,10 +120,11 @@ public class AdminServiceImpl implements AdminService {
         System.out.println(timestamp);
         System.out.println(sdf.format(timestamp));
 
-
+        System.out.println("Im doing Check for TWEeeeeeeeeeeeets");
 
 
         List<GameInfoShort> GameList = adminDAO.getGamesForTweet();
+        System.out.println(GameList.size());
 
         for (GameInfoShort game : GameList){
 
@@ -136,17 +135,17 @@ public class AdminServiceImpl implements AdminService {
 
             if (difference >=0 && difference <5){
                 System.out.println("Im in the 5 minute tweet with a difference of - " +difference);
-//                performFiveMinuteTweet(getFiveMinuteTweet(game.getGame_id()));
+                performFiveMinuteTweet(getFiveMinuteTweet(game.getGame_id()));
             }
 
             else if (difference >= 25 && difference <30){
                 System.out.println("Im in the 30 minutes time tweet with a difference of - " +difference);
-//                performThirtyMinuteTweet(getThirtyMinuteTweet(game.getGame_id()));
+                performThirtyMinuteTweet(getThirtyMinuteTweet(game.getGame_id()));
             }
 
             else if (difference <=-50 && difference > -60){
                 System.out.println("Im in the half time tweet with a difference of - " +difference);
-//                performHTTweet(getHTTweet(game.getGame_id()));
+                performHTTweet(getHTTweet(game.getGame_id()));
             }
         }
     }
@@ -166,101 +165,6 @@ public class AdminServiceImpl implements AdminService {
     }
 
 
-//    @Override
-//    public void getTweet() {
-//        List<GameInfo> gameList = adminDAO.getTweet();
-//        Calendar cal = Calendar.getInstance();
-//        int dayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
-//        String dayOfMonthStr = String.valueOf(dayOfMonth);
-//        System.out.println(gameList.size());
-//
-//        DateFormat sdf = new SimpleDateFormat("hh:mm:ss");
-//        String time_nowStr = sdf.format(cal.getTime());
-//
-//        String time_now_hours = time_nowStr.substring(0,time_nowStr.length() - 6);
-//        String time_now_minutes = time_nowStr.substring(3,time_nowStr.length() - 3);
-//        int time_now_minutes_int = Integer.parseInt(time_now_minutes) ;
-//        int time_now_hours_int = Integer.parseInt(time_now_hours);
-//
-//        System.out.println(time_now_hours +":" +time_now_minutes);
-//
-////        Change date format to dd
-//        for (GameInfo game : gameList){
-//            System.out.println("inloop");
-//            game.setKo_time_date(game.getKo_time_date().substring(8));
-//            System.out.println(game.getKo_time_date());
-//        }
-//        System.out.println("out loop");
-//        System.out.println(dayOfMonth);
-//
-//
-//
-//        for (GameInfo game : gameList){
-//            System.out.println("in loooooop");
-//            if (Integer.parseInt(dayOfMonthStr) == Integer.parseInt(game.getKo_time_date())){
-//                System.out.println("day worked");
-//                int timeLeftUntilKo = 0;
-//                String ko_time = game.getKo_time();
-//                System.out.println(ko_time);
-//                String ko_time_hours = ko_time.substring(0, ko_time.length() -3 );
-//                String ko_time_minutes = ko_time.substring(3);
-//                System.out.println("substring");
-//
-//                int ko_time_hours_int = Integer.parseInt(ko_time_hours);
-//                int ko_time_minutes_int = Integer.parseInt(ko_time_minutes);
-//                System.out.println(ko_time_hours_int + ":" + ko_time_minutes_int);
-//                if (ko_time_hours_int == time_now_hours_int){
-//                    System.out.println("first if");
-//
-////                    if (ko_time_minutes_int > time_now_minutes_int){
-//                    timeLeftUntilKo = ko_time_minutes_int - time_now_minutes_int;
-//
-//                        if (timeLeftUntilKo <= 5){
-//                            performFiveMinuteTweet(getFiveMinuteTweet(game));
-//                        }
-//                        else if (timeLeftUntilKo <=30 && timeLeftUntilKo >25){
-//                            int  n = rand.nextInt(6) + 1;
-//                            if (n == 1){
-//                                performThirtyMinuteTweet(getThirtyMinuteTweet(game));
-//                            }
-//                        }
-//                        else if (timeLeftUntilKo <= -45 && timeLeftUntilKo > -50){
-//                            performHTTweet(getHTTweet(game));
-//                        }
-//
-////                    }
-////                    else if (ko_time_minutes_int < time_now_minutes_int){
-////                        timeLeftUntilKo = ko_time_minutes_int - time_now_minutes_int;
-////                    }
-//                }
-//
-//                else if(ko_time_hours_int == time_now_hours_int +1){
-//
-//                    timeLeftUntilKo = (ko_time_minutes_int + 60) - time_now_minutes_int;
-//
-//                    if (timeLeftUntilKo <= 5){
-//                        performFiveMinuteTweet(getFiveMinuteTweet(game));
-//                    }
-//                    else if (timeLeftUntilKo <=30 && timeLeftUntilKo >=25){
-//                        int  n = rand.nextInt(6) + 1;
-//                        if (n == 1){
-//                            performThirtyMinuteTweet(getThirtyMinuteTweet(game));
-//                        }
-//                    }
-//
-//                }
-//                else if (ko_time_hours_int +1 == time_now_hours_int){
-//
-//                    timeLeftUntilKo = ko_time_minutes_int - (time_now_minutes_int + 60);
-//
-//                    if (timeLeftUntilKo <= -45 && timeLeftUntilKo > -50){
-//                        performHTTweet(getHTTweet(game));
-//                    }
-//                }
-//
-//            }
-//        }
-//    }
 
     private String getHTTweet(int id) {
 
