@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +16,8 @@ import java.util.List;
 public class AdminDAOImpl implements AdminDAO {
 
     private JdbcTemplate jdbcTemplate;
+    private SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+
 
     @Autowired
     public AdminDAOImpl(JdbcTemplate jdbcTemplate){
@@ -79,6 +82,116 @@ public class AdminDAOImpl implements AdminDAO {
     @Override
     public void postFeedback(String msg) {
         jdbcTemplate.update("INSERT INTO feedback (message) VALUES (?) ",msg);
+    }
+
+    @Override
+    public List<GameInfo> getTweet() {
+        List<GameInfo> gameInfoList = new ArrayList<>();
+        jdbcTemplate.query("SELECT game.game_id, game.home, game.away, CAST(ko_time AS DATE) as ko_time_date , (SELECT `name` FROM clubs WHERE club_id = game.home) AS 'HomeTeam', (SELECT `name` FROM clubs WHERE club_id = game.away) AS ' AwayTeam', (SELECT image from clubs where club_id = game.home) AS 'HomeImg',(SELECT image from clubs where club_id = game.away) AS 'AwayImg', game.ko_time FROM game WHERE visable = 1 ORDER BY ko_time LIMIT 20;",
+                new Object[]{},
+                (rs, rowNum) -> gameInfoList.add(new GameInfo(
+                        rs.getInt("game_id"),
+                        rs.getInt("home"),
+                        rs.getInt("away"),
+                        rs.getString("HomeTeam"),
+                        rs.getString("AwayTeam"),
+                        rs.getString("HomeImg"),
+                        rs.getString("AwayImg"),
+                        sdf.format(rs.getTime("ko_time")),
+                        rs.getString("ko_time_date"))
+                ));
+        return gameInfoList;
+    }
+
+    @Override
+    public String getHTTweetMessageIntro() {
+        return jdbcTemplate.queryForObject("SELECT msg FROM msg_b WHERE tweet_cat = 3 ORDER BY RAND() LIMIT 1",
+                new Object[]{},
+                (rs, rowNum) ->
+                        rs.getString("msg")
+                );
+    }
+
+    @Override
+    public String getHTTweetMessageEnd() {
+        return jdbcTemplate.queryForObject("SELECT msg FROM msg_e WHERE tweet_cat = 3 ORDER BY RAND() LIMIT 1",
+                new Object[]{},
+                (rs, rowNum) -> rs.getString("msg")
+        );
+    }
+
+    @Override
+    public String getThirtyMinuteMessageIntro() {
+        return jdbcTemplate.queryForObject("SELECT msg FROM msg_b WHERE tweet_cat = 1 ORDER BY RAND() LIMIT 1",
+                new Object[]{},
+                (rs, rowNum) -> rs.getString("msg")
+        );
+    }
+
+    @Override
+    public String getThirtyMinuteMessageEnd() {
+        return jdbcTemplate.queryForObject("SELECT msg FROM msg_e WHERE tweet_cat = 1 ORDER BY RAND() LIMIT 1",
+                new Object[]{},
+                (rs, rowNum) -> rs.getString("msg")
+        );
+    }
+
+    @Override
+    public String getFiveMinuteMessageIntro() {
+        return jdbcTemplate.queryForObject("SELECT msg FROM msg_b WHERE tweet_cat = 2 ORDER BY RAND() LIMIT 1",
+                new Object[]{},
+                (rs, rowNum) -> rs.getString("msg")
+        );
+    }
+
+    @Override
+    public String getFiveMinuteMessageEnd() {
+        return jdbcTemplate.queryForObject("SELECT msg FROM msg_e WHERE tweet_cat = 2 ORDER BY RAND() LIMIT 1",
+                new Object[]{},
+                (rs, rowNum) -> rs.getString("msg")
+        );
+    }
+
+    @Override
+    public void setVisibilityToHidden(int id) {
+            jdbcTemplate.update("UPDATE game SET visable = 0 WHERE game_id = ? ",id);
+
+    }
+
+    @Override
+    public List<GameInfoShort> getGamesForVisCheck() {
+        List<GameInfoShort> gameInfoList = new ArrayList<>();
+        jdbcTemplate.query("SELECT game.game_id, game.ko_time FROM game WHERE visable = 1 ORDER BY ko_time LIMIT 20;",
+                new Object[]{},
+                (rs, rowNum) -> gameInfoList.add(new GameInfoShort(
+                        rs.getInt("game_id"),
+                        rs.getTimestamp("ko_time"))
+                ));
+        return gameInfoList;
+    }
+
+    @Override
+    public void addMsgEnd(String msg,int id) {
+        jdbcTemplate.update("INSERT INTO msg_b (msg,tweet_cat) VALUES (?,?) ", msg,id);
+
+    }
+
+    @Override
+    public void addMsgBgn(String msg, int id) {
+        jdbcTemplate.update("INSERT INTO msg_e (msg,tweet_cat) VALUES (?,?) ",msg,id);
+
+    }
+
+    @Override
+    public List<GameInfoShort> getGamesForTweet() {
+        List<GameInfoShort> gameInfoList = new ArrayList<>();
+        jdbcTemplate.query("SELECT game.game_id, game.ko_time FROM game WHERE visable = 1 ORDER BY ko_time LIMIT 20;",
+                new Object[]{},
+                (rs, rowNum) -> gameInfoList.add(new GameInfoShort(
+                        rs.getInt("game_id"),
+                        rs.getTimestamp("ko_time"))
+                ));
+        return gameInfoList;
     }
 
 

@@ -58,6 +58,25 @@ public class AdminController {
 
     }
 
+
+    @RequestMapping(value = "/admin/add-msg", method = GET)
+    public String addMsg(Model model, HttpSession session){
+        Account account = (Account) session.getAttribute("account");
+
+        if (account == null){
+            return "redirect:/";
+        }
+        else if (account.getPermissions() == 1){
+            model.addAttribute("account",account);
+            return "webpage/add_msg";
+        }
+        else{
+            return "redirect:/";
+
+        }
+
+    }
+
     @RequestMapping(value = "/admin/add-games", method = GET)
     public String addGames(Model model, HttpSession session){
         model.addAttribute("game_list", gameService.getHomePageGames());
@@ -282,12 +301,50 @@ public class AdminController {
         else{
             return "redirect:/";
         }
-
-
-
     }
 
 
+    @RequestMapping(value = "/admin/msg_bgn/{msg}/{id}", method = POST)
+    public String addMsgBgn(Model model, HttpSession session, @PathVariable("msg") String msg
+            , @PathVariable("id") int id){
 
+        Account account = (Account) session.getAttribute("account");
+
+        if (account == null){
+            return "redirect:/";
+
+        }
+        else if (account.getPermissions() == 1){
+
+            adminService.addMsgBgn(msg,id);
+            return "fragments :: twt-feedback-msg";
+
+        }
+        else{
+            return "redirect:/";
+
+        }
+    }
+
+    @RequestMapping(value = "/admin/msg_end/{msg}/{id}", method = POST)
+    public String addMsgEnd(Model model, HttpSession session, @PathVariable("msg") String msg
+            , @PathVariable("id") int id){
+
+        Account account = (Account) session.getAttribute("account");
+
+        if (account == null){
+            return "redirect:/";
+
+        }
+        else if (account.getPermissions() == 1){
+
+            adminService.addMsgEnd(msg,id);
+            return "fragments :: twt-feedback-msg";
+        }
+        else{
+            return "redirect:/";
+
+        }
+    }
 
 }

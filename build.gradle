@@ -30,6 +30,7 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-jdbc')
     compile("org.springframework.boot:spring-boot-starter-mail")
     compile('org.springframework.boot:spring-boot-starter-web')
+    compile 'org.twitter4j:twitter4j-core:4.0.4'
     compile group: 'javax.mail', name: 'mail', version: '1.4'
 
     runtime('mysql:mysql-connector-java')

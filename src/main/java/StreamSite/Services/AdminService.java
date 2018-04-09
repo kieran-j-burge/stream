@@ -17,4 +17,9 @@ public interface AdminService {
    void removeGameById(int gameId);
    void addStreamToGame(int gameId,String link);
    void postFeedback(String msg);
+//   void getTweet();
+   void hideFinishedGames();
+   void addMsgEnd(String msg,int id);
+   void addMsgBgn(String msg,int id);
+   void checkForTweet();
 }

@@ -1,10 +1,7 @@
 package StreamSite.DAO;
 
 
-import StreamSite.DTO.Club;
-import StreamSite.DTO.GameInfo;
-import StreamSite.DTO.League;
-import StreamSite.DTO.TweetInfo;
+import StreamSite.DTO.*;
 
 import java.sql.Date;
 import java.util.List;
@@ -19,4 +16,16 @@ public interface AdminDAO {
     void  removeGameById(int gameId);
     void addStreamToGame(int gameId,String link);
     void postFeedback(String msg);
+    List<GameInfo> getTweet();
+    String getHTTweetMessageIntro();
+    String getHTTweetMessageEnd();
+    String getThirtyMinuteMessageIntro();
+    String getThirtyMinuteMessageEnd();
+    String getFiveMinuteMessageIntro();
+    String getFiveMinuteMessageEnd();
+    void setVisibilityToHidden(int id);
+    List<GameInfoShort> getGamesForVisCheck();
+    void addMsgEnd(String msg,int id);
+    void addMsgBgn(String msg,int id);
+    List<GameInfoShort> getGamesForTweet();
 }
