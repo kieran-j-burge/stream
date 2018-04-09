@@ -25,13 +25,23 @@ public class twitter {
 
     @Scheduled(cron="* */5 * * * *")
     public void doTweet() {
-        adminService.checkForTweet();
+        try {
+            adminService.checkForTweet();
+
+        } catch (Exception e){
+
+        }
     }
 
 
     @Scheduled(cron="* */10 * * * *")
     public void doVisabilityCheck() {
-        adminService.hideFinishedGames();
+        try {
+            adminService.hideFinishedGames();
+
+        } catch (Exception e){
+
+        }
     }
 
 }
