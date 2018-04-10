@@ -161,11 +161,12 @@ public class AdminDAOImpl implements AdminDAO {
     @Override
     public List<GameInfoShort> getGamesForVisCheck() {
         List<GameInfoShort> gameInfoList = new ArrayList<>();
-        jdbcTemplate.query("SELECT game.game_id, game.ko_time FROM game WHERE visable = 1 ORDER BY ko_time LIMIT 20;",
+        jdbcTemplate.query("SELECT game.game_id, game.ko_time, game.league_id FROM game WHERE visable = 1 ORDER BY ko_time LIMIT 20;",
                 new Object[]{},
                 (rs, rowNum) -> gameInfoList.add(new GameInfoShort(
                         rs.getInt("game_id"),
-                        rs.getTimestamp("ko_time"))
+                        rs.getTimestamp("ko_time"),
+                        rs.getInt("league_id"))
                 ));
         return gameInfoList;
     }
@@ -185,11 +186,12 @@ public class AdminDAOImpl implements AdminDAO {
     @Override
     public List<GameInfoShort> getGamesForTweet() {
         List<GameInfoShort> gameInfoList = new ArrayList<>();
-        jdbcTemplate.query("SELECT game.game_id, game.ko_time FROM game WHERE visable = 1 ORDER BY ko_time LIMIT 20;",
+        jdbcTemplate.query("SELECT game.game_id, game.ko_time, game.league_id  FROM game WHERE visable = 1 ORDER BY ko_time LIMIT 20;",
                 new Object[]{},
                 (rs, rowNum) -> gameInfoList.add(new GameInfoShort(
                         rs.getInt("game_id"),
-                        rs.getTimestamp("ko_time"))
+                        rs.getTimestamp("ko_time"),
+                        rs.getInt("league_id"))
                 ));
         return gameInfoList;
     }

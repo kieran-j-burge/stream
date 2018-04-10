@@ -19,4 +19,5 @@ public interface GameDAO {
     List<GameInfo> getGameHistory();
     GameInfo getMainEventGameInfo(Integer id);
     MainEvent findMainEvent();
+    MainEvent checkMainEvent();
 }

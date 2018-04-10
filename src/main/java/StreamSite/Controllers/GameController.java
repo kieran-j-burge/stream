@@ -44,6 +44,13 @@ public class GameController {
     public String retreiveGamePage(Model model, HttpSession session,
                                    @PathVariable("id") int id){
         try {
+//            try{
+                model.addAttribute("main_event", gameService.checkMainEvent(id));
+//            } catch (Exception e){
+//
+//                model.addAttribute("main_event",null);
+//            }
+
             model.addAttribute("game_info", gameService.getGameById(id));
             model.addAttribute("stream_list", streamService.getStreamsByGameId(id));
             model.addAttribute("gen_stream_list", streamService.getGenStreamsByGameId(id));
@@ -77,7 +84,7 @@ public class GameController {
     @RequestMapping(value = "/main_event", method = GET)
     public String mainEvent(Model model, HttpSession session){
 
-//        try {
+        try {
             if (gameService.getMainEventGameInfo() == null){
                 return "webpage/no-main-event";
             }
@@ -89,10 +96,10 @@ public class GameController {
 
 
 
-//        } catch (Exception e){
+        } catch (Exception e){
 
-//            return "webpage/error_page";
-//        }
+            return "webpage/error_page";
+        }
 
 
     }

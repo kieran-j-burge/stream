@@ -176,6 +176,16 @@ public class GameDAOImpl implements GameDAO {
     }
 
     @Override
+    public MainEvent checkMainEvent() {
+        return jdbcTemplate.queryForObject("SELECT game_id,code FROM main_event WHERE live = 1",
+                new Object[]{},
+                (rs, rowNum) -> new MainEvent(
+                        rs.getInt("game_id"),
+                        rs.getString("code"))
+        );
+    }
+
+    @Override
     public TweetInfo getTweetMessage() {
         return jdbcTemplate.queryForObject("SELECT game.game_id, game.home, game.away, CAST(ko_time AS DATE) as ko_time_date , (SELECT `name` FROM clubs WHERE club_id = game.home) AS 'HomeTeam', (SELECT `name` FROM clubs WHERE club_id = game.away) AS ' AwayTeam', game.ko_time, date(game.ko_time) AS game_date FROM game ORDER BY RAND() LIMIT 1",
                 new Object[]{},

@@ -72,9 +72,9 @@
 </div>
 
 
-
-
 <div th:replace="fragments :: donate"></div>
+
+<div th:if="${game_info != null}" th:replace= "fragments :: live-main-event"></div>
 
 <div class="container-fluid message-container">
     <div class="row">

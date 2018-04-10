@@ -925,6 +925,114 @@
         </div>
     </div>
 
+    <div th:if="${game_info != null}" th:fragment="live-main-event">
+        <a href="/main_event">
+
+        <div class="container-fluid main-event-c-fluid">
+            <div class="container">
+                <div class="row main-event-ad-container">
+                    <!--<div class="main_event_ad">-->
+                            <!--<div class="col-sm-2"></div>-->
+                            <div  class="col-sm-5 ad-title">
+                                <div class="main-event-img-positioner">
+                                    <span>
+                                         <img th:src="@{'/images/badges/'+ ${game_info.homeImg}}" onerror="this.src='/images/badges/999.svg'"></img>
+                                    </span>
+                                </div>
+
+                                <span>
+                                    <p  th:text="${game_info.home}"></p>
+                                </span>
+                            </div>
+                            <div class="col-sm-2 ad-title vs-spacer">
+
+                            </div>
+                            <div  class="col-sm-4 ad-title">
+                                <div class="main-event-img-positioner">
+                                    <span>
+                                        <img  th:src="@{'/images/badges/'+ ${game_info.awayImg}}" onerror="this.src='/images/badges/999.svg'"></img>
+                                    </span>
+                                </div>
+                                <span>
+                                    <p  th:text="${game_info.away}"></p>
+                                </span>
+
+                            </div>
+                            <div  class="col-sm-1 main-event-live-icon">
+
+                                <img src="/images/icons/live.gif"/>
+
+                            </div>
+                            <!--<div class="col-sm-1"></div>-->
+
+                    <!--</div>-->
+                  </div>
+
+            </div>
+        </div>
+        </a>
+
+    </div>
+
+
+    <div th:if="${main_event != null}" th:fragment="live-main-event-game-page">
+
+        <div class="container-fluid live-event-title">
+            <div class="container">
+                <div class="row header-title">
+                    <h1>Live Main Event - Click Below</h1>
+                </div>
+            </div>
+        </div>
+        <a href="/main_event">
+
+            <div class="container-fluid main-event-c-fluid">
+                <div class="container">
+                    <div class="row main-event-ad-container">
+                        <!--<div class="main_event_ad">-->
+                        <!--<div class="col-sm-2"></div>-->
+                        <div  class="col-sm-5 ad-title">
+                            <div class="main-event-img-positioner">
+                                    <span>
+                                         <img th:src="@{'/images/badges/'+ ${main_event.homeImg}}" onerror="this.src='/images/badges/999.svg'"></img>
+                                    </span>
+                            </div>
+
+                            <span>
+                                    <p  th:text="${main_event.home}"></p>
+                                </span>
+                        </div>
+                        <div class="col-sm-2 ad-title vs-spacer">
+
+                        </div>
+                        <div  class="col-sm-4 ad-title">
+                            <div class="main-event-img-positioner">
+                                    <span>
+                                        <img  th:src="@{'/images/badges/'+ ${main_event.awayImg}}" onerror="this.src='/images/badges/999.svg'"></img>
+                                    </span>
+                            </div>
+                            <span>
+                                    <p  th:text="${main_event.away}"></p>
+                                </span>
+
+                        </div>
+                        <div  class="col-sm-1 main-event-live-icon">
+
+                            <img src="/images/icons/live.gif"/>
+
+                        </div>
+                        <!--<div class="col-sm-1"></div>-->
+
+                        <!--</div>-->
+                    </div>
+
+                </div>
+            </div>
+        </a>
+
+    </div>
+
+
 </body>
 
 

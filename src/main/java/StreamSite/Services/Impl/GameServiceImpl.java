@@ -81,6 +81,28 @@ public class GameServiceImpl implements GameService {
         return gameDAO.findMainEvent();
     }
 
+    @Override
+    public GameInfo checkMainEvent(int id) {
+
+//        try{
+            MainEvent me = gameDAO.checkMainEvent();
+
+            if (me.getGame_id() == id){
+                return gameDAO.getGameById(id);
+            }
+            else{
+                return null;
+            }
+
+
+//        } catch (Exception e){
+//            return null;
+//        }
+
+
+
+    }
+
     private List<GameInfo> splitDate(List<GameInfo> games){
 
         for (GameInfo game : games){

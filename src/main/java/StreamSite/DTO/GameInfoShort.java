@@ -14,5 +14,6 @@ public class GameInfoShort {
 
     private Integer game_id;
     private Timestamp ko_time_date;
+    private int league_id;
 
 }

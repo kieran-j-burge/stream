@@ -23,6 +23,21 @@ public class HomeController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String getHomePage(Model model, HttpSession session){
         try {
+
+            try {
+
+                if (gameService.getMainEventGameInfo() == null){
+                    model.addAttribute("game_info", null);
+
+                }
+                else{
+                    model.addAttribute("game_info", gameService.getMainEventGameInfo());
+                }
+
+            }catch (Exception e){
+
+            }
+
             model.addAttribute("game_list", gameService.getHomePageGamesShort());
 
             return "webpage/home";

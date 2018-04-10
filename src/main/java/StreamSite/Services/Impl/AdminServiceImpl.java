@@ -126,7 +126,9 @@ public class AdminServiceImpl implements AdminService {
             }
 
             else if (difference >= 25 && difference <30){
-                performThirtyMinuteTweet(getThirtyMinuteTweet(game.getGame_id()));
+                if (game.getLeague_id() == 1 || game.getLeague_id() == 2|| game.getLeague_id() == 8|| game.getLeague_id() ==9|| game.getLeague_id() ==11|| game.getLeague_id() ==15){
+                    performThirtyMinuteTweet(getThirtyMinuteTweet(game.getGame_id()));
+                }
             }
 
             else if (difference <=-55 && difference > -60){

@@ -17,4 +17,5 @@ public interface GameService {
    List<GameInfo> getGameHistory();
    GameInfo getMainEventGameInfo();
     MainEvent getMainEvent();
+    GameInfo checkMainEvent(int id);
 }
