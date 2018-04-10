@@ -74,6 +74,29 @@ public class GameController {
 
     }
 
+    @RequestMapping(value = "/main_event", method = GET)
+    public String mainEvent(Model model, HttpSession session){
+
+//        try {
+            if (gameService.getMainEventGameInfo() == null){
+                return "webpage/no-main-event";
+            }
+            else{
+                model.addAttribute("game_info", gameService.getMainEventGameInfo());
+                model.addAttribute("main_event", gameService.getMainEvent());
+                return "webpage/main_event";
+            }
+
+
+
+//        } catch (Exception e){
+
+//            return "webpage/error_page";
+//        }
+
+
+    }
+
     @RequestMapping(value = "/search/{game}/{id}", method = GET)
     public String searchByLeague(Model model, HttpSession session,
                                    @PathVariable("game") String game,@PathVariable("id") int id){

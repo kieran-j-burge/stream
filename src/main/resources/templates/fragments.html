@@ -96,7 +96,11 @@
                 <li th:if="${account != null AND account.permissions == 1}"><a href="/admin/alter-club">Alter Club</a></li>
                 <li th:if="${account != null AND account.permissions == 1}"><a href="/admin/alter-game">Alter Game</a></li>
                 <li th:if="${account != null AND account.permissions == 1}"><a href="/admin/add-msg">Add Msg</a></li>
+                <li th:if="${account != null AND account.permissions == 1}"><a href="/admin/add-main-event">Main Event</a></li>
 
+            </ul>
+            <ul class="nav navbar-nav main-event">
+                <li style="float: right"><a href="/main_event">Main Event</a></li>
             </ul>
 
 
@@ -195,7 +199,7 @@
                             </div>
                             <div  class="col-sm-4 col-xs-12 game-title">
                                     <span>
-                                        <img th:src="@{'/images/badges/'+ ${game.homeImg}} + '.svg'" onerror="this.src='/images/badges/999.svg'"></img>
+                                        <img th:src="@{'/images/badges/'+ ${game.homeImg}}" onerror="this.src='/images/badges/999.svg'"></img>
                                     </span>
                                     <span>
                                         <p th:text="${game.home}"></p>
@@ -209,7 +213,7 @@
                                         <p th:text="${game.away}"></p>
                                     </span>
                                     <span>
-                                        <img th:src="@{'/images/badges/'+ ${game.awayImg}} + '.svg'" onerror="this.src='/images/badges/999.svg'"></img>
+                                        <img th:src="@{'/images/badges/'+ ${game.awayImg}}" onerror="this.src='/images/badges/999.svg'"></img>
                                     </span>
                             </div>
                             <div class="col-sm-1 col-xs-12">
@@ -337,7 +341,7 @@
                             </div>
                             <div  class="col-sm-4 col-xs-12 game-title">
                                 <span>
-                                    <img th:src="@{'/images/badges/'+ ${game.homeImg}} + '.svg'" onerror="this.src='/images/badges/999.svg'"></img>
+                                    <img th:src="@{'/images/badges/'+ ${game.homeImg}}" onerror="this.src='/images/badges/999.svg'"></img>
                                 </span>
                                 <span>
                                     <p th:text="${game.home}"></p>
@@ -351,7 +355,7 @@
                                     <p th:text="${game.away}"></p>
                                 </span>
                                 <span>
-                                    <img th:src="@{'/images/badges/'+ ${game.awayImg}} + '.svg'" onerror="this.src='/images/badges/999.svg'"></img>
+                                    <img th:src="@{'/images/badges/'+ ${game.awayImg}}" onerror="this.src='/images/badges/999.svg'"></img>
                                 </span>
                             </div>
                             <div class="col-sm-1 col-xs-12">
@@ -405,7 +409,7 @@
                             </div>
                             <div  class="col-sm-4 game-title">
                                 <span>
-                                    <img th:src="@{'/images/badges/'+ ${game.homeImg}} + '.svg'" onerror="this.src='/images/badges/999.svg'"></img>
+                                    <img th:src="@{'/images/badges/'+ ${game.homeImg}}" onerror="this.src='/images/badges/999.svg'"></img>
                                 </span>
                                 <span>
                                     <p th:text="${game.home}"></p>
@@ -419,7 +423,45 @@
                                     <p th:text="${game.away}"></p>
                                 </span>
                                 <span>
-                                    <img th:src="@{'/images/badges/'+ ${game.awayImg}} + '.svg'" onerror="this.src='/images/badges/999.svg'"></img>
+                                    <img th:src="@{'/images/badges/'+ ${game.awayImg}}" onerror="this.src='/images/badges/999.svg'"></img>
+                                </span>
+                            </div>
+                            <div class="col-sm-1">
+
+                            </div>
+                        </a>
+                    </div>
+                </th:block>
+            </div>
+        </div>
+    </div>
+
+    <div th:fragment="main_event_page_game_list">
+        <div class="container-fluid">
+            <div class="container">
+                <th:block th:each="game : ${game_list}">
+                    <div class="row game-info-holder">
+                        <a th:href="@{'/admin/game/main_event/' + ${game.game_id}}">
+                            <div  class="col-sm-1">
+                                <p th:text="${game.ko_time}"></p>
+                            </div>
+                            <div  class="col-sm-4 game-title">
+                                <span>
+                                    <img th:src="@{'/images/badges/'+ ${game.homeImg}}" onerror="this.src='/images/badges/999.svg'"></img>
+                                </span>
+                                <span>
+                                    <p th:text="${game.home}"></p>
+                                </span>
+                            </div>
+                            <div class="col-sm-2 game-title vs-spacer">
+                                <p class="">  vs  </p>
+                            </div>
+                            <div  class="col-sm-4 game-title">
+                                <span>
+                                    <p th:text="${game.away}"></p>
+                                </span>
+                                <span>
+                                    <img th:src="@{'/images/badges/'+ ${game.awayImg}}" onerror="this.src='/images/badges/999.svg'"></img>
                                 </span>
                             </div>
                             <div class="col-sm-1">
@@ -555,7 +597,7 @@
                             </div>
                             <div  class="col-sm-4 col-xs-12 game-title">
                                 <span>
-                                    <img th:src="@{'/images/badges/'+ ${game.homeImg}} + '.svg'" onerror="this.src='/images/badges/999.svg'"></img>
+                                    <img th:src="@{'/images/badges/'+ ${game.homeImg}}" onerror="this.src='/images/badges/999.svg'"></img>
                                 </span>
                                 <span>
                                     <p th:text="${game.home}"></p>
@@ -569,7 +611,7 @@
                                     <p th:text="${game.away}"></p>
                                 </span>
                                 <span>
-                                    <img th:src="@{'/images/badges/'+ ${game.awayImg}} + '.svg'" onerror="this.src='/images/badges/999.svg'"></img>
+                                    <img th:src="@{'/images/badges/'+ ${game.awayImg}}" onerror="this.src='/images/badges/999.svg'"></img>
                                 </span>
                             </div>
                             <div class="col-sm-1 col-xs-12">
@@ -650,7 +692,7 @@
                         <div class="col-sm-5 game-title">
                             <div class="game-info-positioner">
                             <span>
-                                <img th:src="@{'/images/badges/'+ ${game_info.homeImg}} + '.svg'" onerror="this.src='/images/badges/999.svg'"></img>
+                                <img th:src="@{'/images/badges/'+ ${game_info.homeImg}}" onerror="this.src='/images/badges/999.svg'"></img>
                             </span>
                                 <span>
                                 <p th:text="${game_info.home}"></p>
@@ -672,7 +714,7 @@
                                 <p th:text="${game_info.away}"></p>
                             </span>
                                 <span>
-                                <img th:src="@{'/images/badges/'+ ${game_info.awayImg}} + '.svg'" onerror="this.src='/images/badges/999.svg'"></img>
+                                <img th:src="@{'/images/badges/'+ ${game_info.awayImg}}" onerror="this.src='/images/badges/999.svg'"></img>
                             </span>
                             </div>
                         </div>
@@ -697,7 +739,7 @@
                         <div  class="col-sm-5 col-xs-12 game-title">
                             <span>
                                 <div class="badge-holder">
-                                    <img th:src="@{'/images/badges/'+ ${game.homeImg}} + '.svg'" onerror="this.src='/images/badges/999.svg'"></img>
+                                    <img th:src="@{'/images/badges/'+ ${game.homeImg}}" onerror="this.src='/images/badges/999.svg'"></img>
                                 </div>
                             </span>
                             <span>
@@ -710,7 +752,7 @@
                         <div  class="col-sm-5 col-xs-12 game-title">
                             <span>
                                 <div class="badge-holder">
-                                    <img th:src="@{'/images/badges/'+ ${game.awayImg}} + '.svg'" onerror="this.src='/images/badges/999.svg'"></img>
+                                    <img th:src="@{'/images/badges/'+ ${game.awayImg}}" onerror="this.src='/images/badges/999.svg'"></img>
                                 </div>
                             </span>
                             <span>
@@ -780,7 +822,7 @@
                             </div>
                             <div  class="col-sm-11 game-title">
                                 <span>
-                                    <img th:src="@{'/images/badges/'+ ${club.img}} + '.svg'" onerror="this.src='/images/badges/999.svg'"></img>
+                                    <img th:src="@{'/images/badges/'+ ${club.img}}" onerror="this.src='/images/badges/999.svg'"></img>
                                 </span>
                                 <span>
                                     <p th:text="${club.name}"></p>
@@ -859,6 +901,28 @@
 
     <div th:fragment="twt-feedback-msg">
         Message Added
+    </div>
+
+    <div th:fragment="main-event-off-response-msg">
+        Main Event Off
+    </div>
+
+    <div th:fragment="main-event-response-msg">
+        Main Event Set
+    </div>
+
+
+
+    <div th:fragment="main-event">
+        <div class="container-fluid">
+            <div class="container">
+                <div class="row">
+                    <div class="main_event_player">
+                        <div class="content" th:utext="${main_event.code}"/>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 </body>

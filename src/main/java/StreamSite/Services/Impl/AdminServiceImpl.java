@@ -91,20 +91,14 @@ public class AdminServiceImpl implements AdminService {
     public void hideFinishedGames() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-        System.out.println(timestamp);
-        System.out.println(sdf.format(timestamp));
 
 
 
 
         List<GameInfoShort> GameList = adminDAO.getGamesForVisCheck();
-        System.out.println("Im doing HIDE FINISHED GAMES");
-        System.out.println(GameList.size());
         for (GameInfoShort game : GameList){
-            System.out.println(game.getKo_time_date());
 
             int difference = hoursDifference(game.getKo_time_date(),timestamp);
-            System.out.println("Difference between game in hours for vis is--- " + difference);
 
             if (difference <= -3){
                 setVisibilityStatus(game.getGame_id());
@@ -117,37 +111,38 @@ public class AdminServiceImpl implements AdminService {
     public void checkForTweet() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-        System.out.println(timestamp);
-        System.out.println(sdf.format(timestamp));
 
-        System.out.println("Im doing Check for TWEeeeeeeeeeeeets");
 
 
         List<GameInfoShort> GameList = adminDAO.getGamesForTweet();
-        System.out.println(GameList.size());
 
         for (GameInfoShort game : GameList){
 
-            System.out.println(game.getKo_time_date());
 
             int difference = minutesDifference(game.getKo_time_date(),timestamp);
-            System.out.println("Difference between times is--- " + difference);
 
             if (difference >=0 && difference <5){
-                System.out.println("Im in the 5 minute tweet with a difference of - " +difference);
                 performFiveMinuteTweet(getFiveMinuteTweet(game.getGame_id()));
             }
 
             else if (difference >= 25 && difference <30){
-                System.out.println("Im in the 30 minutes time tweet with a difference of - " +difference);
                 performThirtyMinuteTweet(getThirtyMinuteTweet(game.getGame_id()));
             }
 
             else if (difference <=-55 && difference > -60){
-                System.out.println("Im in the half time tweet with a difference of - " +difference);
                 performHTTweet(getHTTweet(game.getGame_id()));
             }
         }
+    }
+
+    @Override
+    public void setMainEvent(int id,String code) {
+        adminDAO.setMainEvent(id,code);
+    }
+
+    @Override
+    public void mainEventOff() {
+        adminDAO.mainEventOff();
     }
 
     @Override
@@ -203,7 +198,6 @@ public class AdminServiceImpl implements AdminService {
         {
             TwitterFactory factory = new TwitterFactory(cb.build());
             Twitter twitter = factory.getInstance();
-            System.out.println("tweeeeeeeeeet ht");
             twitter.updateStatus(tweetMsg);
         }catch (TwitterException te) {
             te.printStackTrace();
@@ -224,7 +218,6 @@ public class AdminServiceImpl implements AdminService {
         {
             TwitterFactory factory = new TwitterFactory(cb.build());
             Twitter twitter = factory.getInstance();
-            System.out.println("tweeeeeeeeeet 30");
 
             twitter.updateStatus(tweetMsg);
         }catch (TwitterException te) {
@@ -246,7 +239,6 @@ public class AdminServiceImpl implements AdminService {
         {
             TwitterFactory factory = new TwitterFactory(cb.build());
             Twitter twitter = factory.getInstance();
-            System.out.println("tweeeeeeeeeet 5");
 
             twitter.updateStatus(tweetMsg);
         }catch (TwitterException te) {

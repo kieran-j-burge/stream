@@ -2,6 +2,7 @@ package StreamSite.Services;
 
 
 import StreamSite.DTO.GameInfo;
+import StreamSite.DTO.MainEvent;
 
 import java.util.List;
 
@@ -14,4 +15,6 @@ public interface GameService {
    String getTweetMessage();
    List<GameInfo> getGamesBySearchByLeague(String game, int id);
    List<GameInfo> getGameHistory();
+   GameInfo getMainEventGameInfo();
+    MainEvent getMainEvent();
 }

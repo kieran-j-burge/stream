@@ -347,4 +347,91 @@ public class AdminController {
         }
     }
 
+    @RequestMapping(value = "/admin/add-main-event", method = GET)
+    public String addMsgEnd(Model model, HttpSession session){
+
+        Account account = (Account) session.getAttribute("account");
+
+        if (account == null){
+            return "redirect:/";
+
+        }
+        else if (account.getPermissions() == 1){
+
+            model.addAttribute("game_list", gameService.getHomePageGames());
+            return "webpage/add-main-event";
+        }
+        else{
+            return "redirect:/";
+
+        }
+    }
+
+
+
+    @RequestMapping(value = "/admin/game/main_event/{id}", method = GET)
+    public String loadMainEventPage(Model model, HttpSession session,@PathVariable("id") int id){
+
+        Account account = (Account) session.getAttribute("account");
+
+        if (account == null){
+            return "redirect:/";
+
+        }
+        else if (account.getPermissions() == 1){
+
+            model.addAttribute("game_info", gameService.getGameById(id));
+
+            return "webpage/add-main-event-game-page";
+        }
+        else{
+            return "redirect:/";
+
+        }
+    }
+
+
+
+    @RequestMapping(value = "/admin/set-main-event/{id}/{code}", method = POST)
+    public String setMainEvent(Model model, HttpSession session,@PathVariable("id") int id, @PathVariable("code") String code){
+
+        code = code.replaceAll("£",".");
+        code = code.replaceAll("`","/");
+        Account account = (Account) session.getAttribute("account");
+
+        if (account == null){
+            return "redirect:/";
+
+        }
+        else if (account.getPermissions() == 1){
+
+            adminService.setMainEvent(id,code);
+            return "fragments :: main-event-response-msg";
+        }
+        else{
+            return "redirect:/";
+
+        }
+    }
+
+
+
+    @RequestMapping(value = "/admin/set-main-event/off", method = POST)
+    public String setMainEvent(Model model, HttpSession session){
+
+        Account account = (Account) session.getAttribute("account");
+
+        if (account == null){
+            return "redirect:/";
+
+        }
+        else if (account.getPermissions() == 1){
+            System.out.println("controller");
+            adminService.mainEventOff();
+            return "fragments :: main-event-off-response-msg";
+        }
+        else{
+            return "redirect:/";
+        }
+    }
 }

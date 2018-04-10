@@ -2,6 +2,7 @@ package StreamSite.DAO.Impl;
 
 import StreamSite.DAO.GameDAO;
 import StreamSite.DTO.GameInfo;
+import StreamSite.DTO.MainEvent;
 import StreamSite.DTO.TweetInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -138,6 +139,40 @@ public class GameDAOImpl implements GameDAO {
                         rs.getString("ko_time_date"))
                 ));
         return gameInfoList;
+    }
+
+    @Override
+    public GameInfo getMainEventGameInfo(Integer id) {
+        return jdbcTemplate.queryForObject("SELECT game.game_id, game.home, game.away, CAST(ko_time AS DATE) as ko_time_date , (SELECT `name` FROM clubs WHERE club_id = game.home) AS 'HomeTeam', (SELECT `name` FROM clubs WHERE club_id = game.away) AS ' AwayTeam', (SELECT image from clubs where club_id = game.home) AS 'HomeImg',(SELECT image from clubs where club_id = game.away) AS 'AwayImg', game.ko_time FROM game  WHERE game_id = ?",
+                new Object[]{id},
+                (rs, rowNum) -> new GameInfo(
+                        rs.getInt("game_id"),
+                        rs.getInt("home"),
+                        rs.getInt("away"),
+                        rs.getString("HomeTeam"),
+                        rs.getString("AwayTeam"),
+                        rs.getString("HomeImg"),
+                        rs.getString("AwayImg"),
+                        sdf.format(rs.getTime("ko_time")),
+                        rs.getString("ko_time_date"))
+                );
+    }
+
+    @Override
+    public MainEvent findMainEvent() {
+        try {
+
+            return jdbcTemplate.queryForObject("SELECT game_id,code FROM main_event WHERE live = 1",
+                    new Object[]{},
+                    (rs, rowNum) -> new MainEvent(
+                            rs.getInt("game_id"),
+                            rs.getString("code"))
+            );
+
+            } catch (Exception e){
+            return null;
+            }
+
     }
 
     @Override

@@ -28,4 +28,6 @@ public interface AdminDAO {
     void addMsgEnd(String msg,int id);
     void addMsgBgn(String msg,int id);
     List<GameInfoShort> getGamesForTweet();
+    void setMainEvent(int id, String code);
+    void mainEventOff();
 }

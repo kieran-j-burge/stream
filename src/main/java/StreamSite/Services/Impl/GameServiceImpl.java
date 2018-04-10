@@ -2,6 +2,7 @@ package StreamSite.Services.Impl;
 
 import StreamSite.DAO.GameDAO;
 import StreamSite.DTO.GameInfo;
+import StreamSite.DTO.MainEvent;
 import StreamSite.DTO.TweetInfo;
 import StreamSite.Services.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,6 +64,21 @@ public class GameServiceImpl implements GameService {
     @Override
     public List<GameInfo> getGameHistory() {
         return splitDate(gameDAO.getGameHistory());
+    }
+
+    @Override
+    public GameInfo getMainEventGameInfo() {
+        try{
+            return gameDAO.getMainEventGameInfo(gameDAO.findMainEvent().getGame_id());
+
+        } catch (Exception e){
+        return null;
+     }
+    }
+
+    @Override
+    public MainEvent getMainEvent() {
+        return gameDAO.findMainEvent();
     }
 
     private List<GameInfo> splitDate(List<GameInfo> games){

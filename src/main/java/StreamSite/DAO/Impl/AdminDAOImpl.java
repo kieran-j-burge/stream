@@ -154,7 +154,7 @@ public class AdminDAOImpl implements AdminDAO {
 
     @Override
     public void setVisibilityToHidden(int id) {
-            jdbcTemplate.update("UPDATE game SET visable = 0 WHERE game_id = ? ",id);
+        jdbcTemplate.update("UPDATE game SET visable = 0 WHERE game_id = ? ",id);
 
     }
 
@@ -172,13 +172,13 @@ public class AdminDAOImpl implements AdminDAO {
 
     @Override
     public void addMsgEnd(String msg,int id) {
-        jdbcTemplate.update("INSERT INTO msg_b (msg,tweet_cat) VALUES (?,?) ", msg,id);
+        jdbcTemplate.update("INSERT INTO msg_e (msg,tweet_cat) VALUES (?,?) ", msg,id);
 
     }
 
     @Override
     public void addMsgBgn(String msg, int id) {
-        jdbcTemplate.update("INSERT INTO msg_e (msg,tweet_cat) VALUES (?,?) ",msg,id);
+        jdbcTemplate.update("INSERT INTO msg_b (msg,tweet_cat) VALUES (?,?) ",msg,id);
 
     }
 
@@ -192,6 +192,17 @@ public class AdminDAOImpl implements AdminDAO {
                         rs.getTimestamp("ko_time"))
                 ));
         return gameInfoList;
+    }
+
+    @Override
+    public void setMainEvent(int id, String code) {
+        jdbcTemplate.update("UPDATE main_event SET game_id = ?, code = ?,live = 1 WHERE main_event_id = 1", id,code);
+
+    }
+
+    @Override
+    public void mainEventOff() {
+        jdbcTemplate.update("UPDATE main_event SET live = 0 WHERE live = 1");
     }
 
 

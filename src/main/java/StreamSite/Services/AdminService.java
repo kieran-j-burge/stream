@@ -22,4 +22,6 @@ public interface AdminService {
    void addMsgEnd(String msg,int id);
    void addMsgBgn(String msg,int id);
    void checkForTweet();
+   void setMainEvent(int id,String code);
+   void mainEventOff();
 }
