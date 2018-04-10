@@ -166,7 +166,7 @@ public class AdminServiceImpl implements AdminService {
     private String getHTTweet(int id) {
 
         GameInfo game = gameDAO.getGameById(id);
-        String twtMsg = (adminDAO.getHTTweetMessageIntro()) + " " +game.getHome()+" vs "+ game.getAway() +" | "+ (adminDAO.getHTTweetMessageEnd());
+        String twtMsg = (adminDAO.getHTTweetMessageIntro()) + " " +game.getHome()+" vs "+ game.getAway() +" | "+ (adminDAO.getHTTweetMessageEnd()) +"  #"+game.getHome() +"  #"+game.getHome();
 
         return twtMsg;
     }
@@ -174,7 +174,7 @@ public class AdminServiceImpl implements AdminService {
     private String getThirtyMinuteTweet(int id) {
 
         GameInfo game = gameDAO.getGameById(id);
-        String twtMsg = (adminDAO.getThirtyMinuteMessageIntro()) + " " +game.getHome()+" vs "+ game.getAway() +" | "+ (adminDAO.getThirtyMinuteMessageEnd());
+        String twtMsg = (adminDAO.getThirtyMinuteMessageIntro()) + " " +game.getHome()+" vs "+ game.getAway() +" | "+ (adminDAO.getThirtyMinuteMessageEnd()) +"  #"+game.getHome() +"  #"+game.getHome();
 
         return twtMsg;
     }
@@ -182,7 +182,7 @@ public class AdminServiceImpl implements AdminService {
     private String getFiveMinuteTweet(int id) {
 
         GameInfo game = gameDAO.getGameById(id);
-        String twtMsg = (adminDAO.getFiveMinuteMessageIntro()) + " " +game.getHome()+" vs "+ game.getAway() +" | "+ (adminDAO.getFiveMinuteMessageEnd());
+        String twtMsg = (adminDAO.getFiveMinuteMessageIntro()) + " " +game.getHome()+" vs "+ game.getAway() +" | "+ (adminDAO.getFiveMinuteMessageEnd()) +"  #"+game.getHome() +"  #"+game.getHome();
 
         return twtMsg;
     }
