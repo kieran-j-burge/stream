@@ -29,10 +29,14 @@ public class AdminServiceImpl implements AdminService {
 
     private AdminDAO adminDAO;
     private GameDAO gameDAO;
-    private String consumerKey = "sddl6FJB9yfCIAOuXkjRapgzl";
-    private String consumerSecret = "71hxklzhPszVK8NBFKk9KH7VY056QxFZjxd1zh6fqLhh0VI3df";
-    private String accessToken = "983416989329842177-XjHTYrNED5Zp6UfR0DOJJWPKVqiOV1D";
-    private String accessSecret = "kcl6LW0dvCHVwAaxRJVAiZ3jYBjm9euXKqApRnq3rVuFe";
+//    private String consumerKey = "sddl6FJB9yfCIAOuXkjRapgzl";
+//    private String consumerSecret = "71hxklzhPszVK8NBFKk9KH7VY056QxFZjxd1zh6fqLhh0VI3df";
+//    private String accessToken = "983416989329842177-XjHTYrNED5Zp6UfR0DOJJWPKVqiOV1D";
+//    private String accessSecret = "kcl6LW0dvCHVwAaxRJVAiZ3jYBjm9euXKqApRnq3rVuFe";
+    private String consumerKey = "zbZ2kZVlstVAw8LINGITkWbTw";
+    private String consumerSecret = "T8UqlZi8mfd1VbQzSt1TA6RsXCAt8UR07gYYXKWgV45Se1Vnac";
+    private String accessToken = "979741991754960896-27l8sNqq06zvYpK6k3QcgXFQrxoNvPH";
+    private String accessSecret = "W3yNdka16WvAqF9AylxBlNx0OdKOFW9BXX8mWICmIAJ9H";
 
     Random rand = new Random();
 
@@ -126,7 +130,7 @@ public class AdminServiceImpl implements AdminService {
             }
 
             else if (difference >= 25 && difference <30){
-                if (game.getLeague_id() == 1 || game.getLeague_id() == 2|| game.getLeague_id() == 8|| game.getLeague_id() ==9|| game.getLeague_id() ==11|| game.getLeague_id() ==15){
+                if (game.getLeague_id() == 1 || game.getLeague_id() == 2|| game.getLeague_id() == 8|| game.getLeague_id() ==9|| game.getLeague_id() ==11|| game.getLeague_id() ==15 || game.getLeague_id() ==16){
                     performTweet(getThirtyMinuteTweet(game.getGame_id()));
                 }
             }
