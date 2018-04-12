@@ -3,6 +3,7 @@ package StreamSite.Services.Impl;
 import StreamSite.DAO.GameDAO;
 import StreamSite.DAO.StreamDAO;
 import StreamSite.DTO.Channel;
+import StreamSite.DTO.ChannelStream;
 import StreamSite.DTO.GameInfo;
 import StreamSite.DTO.Stream;
 import StreamSite.Services.StreamService;
@@ -54,6 +55,11 @@ public class StreamServiceImpl implements StreamService {
     @Override
     public Stream getGenStreamById(int id) {
         return streamDAO.getGenStreamById(id);
+    }
+
+    @Override
+    public ChannelStream getChannel(int id) {
+        return streamDAO.getChannel(id);
     }
 
 

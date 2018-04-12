@@ -2,6 +2,7 @@ package StreamSite.DAO.Impl;
 
 import StreamSite.DAO.StreamDAO;
 import StreamSite.DTO.Channel;
+import StreamSite.DTO.ChannelStream;
 import StreamSite.DTO.GameInfo;
 import StreamSite.DTO.Stream;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,6 +68,18 @@ public class StreamDAOImpl implements StreamDAO {
                         rs.getInt("gen_stream_id"),
                         rs.getString("url"),
                         rs.getInt("vote"))
+        );
+    }
+
+    @Override
+    public ChannelStream getChannel(int id) {
+        return jdbcTemplate.queryForObject("SELECT * FROM `channels_stream` WHERE `channel_id` = ?; ",
+                new Object[]{id},
+                (rs, rowNum) -> new ChannelStream(
+                        rs.getInt("channel_id"),
+                        rs.getString("name"),
+                        rs.getString("code"),
+                        rs.getInt("live"))
         );
     }
 

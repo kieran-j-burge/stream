@@ -1,6 +1,7 @@
 package StreamSite.Services;
 
 
+import StreamSite.DTO.ChannelStream;
 import StreamSite.DTO.Club;
 import StreamSite.DTO.GameInfo;
 import StreamSite.DTO.League;
@@ -24,4 +25,9 @@ public interface AdminService {
    void checkForTweet();
    void setMainEvent(int id,String code);
    void mainEventOff();
+   void tweetChannel();
+   List<ChannelStream> getChannelList();
+   void setChannelOff(int id);
+   void setChannelCode(int id,String code);
+   void setChannelOn(int id);
 }

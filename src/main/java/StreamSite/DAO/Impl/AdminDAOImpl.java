@@ -207,5 +207,94 @@ public class AdminDAOImpl implements AdminDAO {
         jdbcTemplate.update("UPDATE main_event SET live = 0 WHERE live = 1");
     }
 
+    @Override
+    public String getChannelTweet() {
+        try{
+
+            return jdbcTemplate.queryForObject("SELECT name FROM channels_stream WHERE live = 1 ORDER BY RAND() LIMIT 1",
+                new Object[]{},
+                (rs, rowNum) -> rs.getString("name")
+        );
+
+            } catch (Exception e){
+
+                return null;
+            }
+
+
+    }
+
+    @Override
+    public List<ChannelStream> getChannelList() {
+
+        List<ChannelStream> channelList = new ArrayList<>();
+
+        try{
+            jdbcTemplate.query("SELECT * FROM channels_stream;",
+                new Object[]{},
+                (rs, rowNum) -> channelList.add(new ChannelStream(
+                        rs.getInt("channel_id"),
+                        rs.getString("name"),
+                        rs.getString("code"),
+                        rs.getInt("live")
+                )));
+        return channelList;
+        } catch (Exception e){
+
+            return null;
+        }
+
+
+
+
+    }
+
+    @Override
+    public void setChannelOff(int id) {
+
+        jdbcTemplate.update("UPDATE channels_stream SET live = 0 WHERE channel_id = ?", id);
+    }
+
+    @Override
+    public void setChannelOn(int id) {
+        jdbcTemplate.update("UPDATE channels_stream SET live = 1 WHERE channel_id = ?", id);
+    }
+
+    @Override
+    public void setChannelCode(int id, String code) {
+        jdbcTemplate.update("UPDATE channels_stream SET code = ? WHERE channel_id = ?", code,id);
+
+    }
+
+    @Override
+    public String getChannelTweetBgn() {
+        try{
+
+            return jdbcTemplate.queryForObject("SELECT msg FROM msg_b WHERE tweet_cat = 4 ORDER BY RAND() LIMIT 1",
+                    new Object[]{},
+                    (rs, rowNum) -> rs.getString("msg")
+            );
+
+        } catch (Exception e){
+
+            return null;
+        }
+    }
+
+    @Override
+    public String getChannelTweetEnd() {
+        try{
+
+            return jdbcTemplate.queryForObject("SELECT msg FROM msg_e WHERE tweet_cat = 4 ORDER BY RAND() LIMIT 1",
+                    new Object[]{},
+                    (rs, rowNum) -> rs.getString("msg")
+            );
+
+        } catch (Exception e){
+
+            return null;
+        }
+    }
+
 
 }

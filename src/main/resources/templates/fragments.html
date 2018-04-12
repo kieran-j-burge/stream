@@ -36,36 +36,6 @@
     <!--</script>-->
 </head>
 
-<!--<head th:fragement="league-head">-->
-    <!--<meta http-equiv="Content-Type" content="text/html;" charset="UTF-8"/>-->
-    <!--<META NAME="ROBOTS" CONTENT="INDEX, FOLLOW"/>-->
-    <!--<meta name="viewport" content="width=device-width, initial-scale=1"/>-->
-    <!--<meta name="theme-color" content="#353535"/>-->
-    <!--<meta name="keywords" content="CleanStream live streams, Premier League live streams, bundasliga live streams, Liga Santander live streams Football Live Streams, free live streams, "/>-->
-    <!--<meta name="description" content="CleanStream - Browse through many of our different football leagues to find a free live stream for your game| Premier League, Bundasliga, Liga Santander, Serie A and many more!"/>-->
-    <!--<title>Clean Streams</title>-->
-    <!--<link rel="stylesheet" media="all" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>-->
-    <!--<link rel='shortcut icon' type='image/x-icon' href='/images/misc/icon.png' />-->
-    <!--<script  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>-->
-    <!--<script  src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>-->
-    <!--<script  src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>-->
-    <!--<script  th:src="@{/css/js/jquery.js}" src="../static/css/js/jquery.js"></script>-->
-    <!--<link rel="manifest" href="/css/json/manifest.json"/>-->
-
-    <!--<link rel="stylesheet" media="all" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>-->
-    <!--<link rel="stylesheet" media="all" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"/>-->
-    <!--<script  src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>-->
-
-    <!--<link rel="stylesheet" media="all" th:href="@{/css/master.css}" href="/static/css/master.css"/>-->
-    <!--&lt;!&ndash;<script>&ndash;&gt;-->
-    <!--&lt;!&ndash;(adsbygoogle = window.adsbygoogle || []).push({&ndash;&gt;-->
-    <!--&lt;!&ndash;google_ad_client: "ca-pub-5981371367764735",&ndash;&gt;-->
-    <!--&lt;!&ndash;enable_page_level_ads: true&ndash;&gt;-->
-    <!--&lt;!&ndash;});&ndash;&gt;-->
-    <!--&lt;!&ndash;</script>&ndash;&gt;-->
-<!--</head>-->
-
-
 <body>
 
     <nav th:fragement="nav" class="navbar navbar-inverse" id="nav-bar">
@@ -88,6 +58,19 @@
                         <li><a href="/league/11">Ligue 1</a></li>
                     </ul>
                 </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Channels
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/channel/1">Sky Sports Main Event</a></li>
+                        <li><a href="/channel/2">Sky Sports Football</a></li>
+                        <li><a href="/channel/3">Sky Sports Premier League</a></li>
+                        <li><a href="/channel/4">Sky Sports News</a></li>
+                        <li><a href="/channel/5">Sky Sports Golf</a></li>
+                        <li><a href="/channel/6">BT Sport 1</a></li>
+                        <li><a href="/channel/7">BT Sport 2</a></li>
+                    </ul>
+                </li>
                 <li th:if="${account != null AND account.permissions == 1}"><a href="/admin">Admin</a></li>
                 <li th:if="${account != null AND account.permissions == 1}"><a href="/admin/add-games">Add Games</a></li>
                 <li th:if="${account != null AND account.permissions == 1}"><a href="/admin/add-clubs">Add Clubs</a></li>
@@ -97,48 +80,19 @@
                 <li th:if="${account != null AND account.permissions == 1}"><a href="/admin/alter-game">Alter Game</a></li>
                 <li th:if="${account != null AND account.permissions == 1}"><a href="/admin/add-msg">Add Msg</a></li>
                 <li th:if="${account != null AND account.permissions == 1}"><a href="/admin/add-main-event">Main Event</a></li>
+                <li th:if="${account != null AND account.permissions == 1}"><a href="/admin/channel-settings">Channels</a></li>
 
             </ul>
-            <ul class="nav navbar-nav main-event">
+
+            <ul th:if="${game_info != null}" class="nav navbar-nav main-event-on">
                 <li style="float: right"><a href="/main_event">Main Event</a></li>
             </ul>
 
-
-            <!--<ul class="nav navbar-nav log-in-positioner">-->
-                <!--<li><a href="/login">Log In</a></li>-->
-                <!--<li class="log-out-btn"><a>Log Out</a></li>-->
-            <!--</ul>-->
+            <ul th:if="${game_info == null}" class="nav navbar-nav main-event">
+                <li style="float: right"><a href="/main_event">Main Event</a></li>
+            </ul>
         </div>
     </nav>
-
-    <!--<nav th:fragement="nav-admin" class="navbar navbar-inverse">-->
-        <!--<div class="container-fluid">-->
-            <!--<div class="navbar-header">-->
-                <!--<a class="navbar-brand" href="/">CleanStreams</a>-->
-            <!--</div>-->
-            <!--<ul class="nav navbar-nav">-->
-                <!--<li class="active"><a href="/">Home</a></li>-->
-                <!--<li><a href="/game_list">Game List</a></li>-->
-                <!--<li><a href="/leagues">Leagues</a></li>-->
-                <!--<li class="dropdown">-->
-                    <!--<a class="dropdown-toggle" data-toggle="dropdown" href="#">Quick Leagues-->
-                        <!--<span class="caret"></span></a>-->
-                    <!--<ul class="dropdown-menu">-->
-                        <!--<li><a href="/league/1">Premier League</a></li>-->
-                        <!--<li><a href="/league/2">Liga Santander</a></li>-->
-                        <!--<li><a href="/league/8">Bundasliga</a></li>-->
-                        <!--<li><a href="/league/9">Serie A</a></li>-->
-                        <!--<li><a href="/league/11">Ligue 1</a></li>-->
-                    <!--</ul>-->
-                <!--</li>-->
-                <!---->
-            <!--</ul>-->
-            <!--&lt;!&ndash;<ul class="nav navbar-nav log-in-positioner">&ndash;&gt;-->
-                <!--&lt;!&ndash;<li><a href="/login">Log In</a></li>&ndash;&gt;-->
-                <!--&lt;!&ndash;<li class="log-out-btn"><a>Log Out</a></li>&ndash;&gt;-->
-            <!--&lt;!&ndash;</ul>&ndash;&gt;-->
-        <!--</div>-->
-    <!--</nav>-->
 
     <div th:fragment="message">
         <div class="container-fluid message-container">
@@ -911,6 +865,14 @@
         Main Event Set
     </div>
 
+    <div th:fragment="admin-channel-on-msg">
+        Channel On
+    </div>
+
+    <div th:fragment="admin-channel-off-msg">
+        Channel Off
+    </div>
+
 
 
     <div th:fragment="main-event">
@@ -1031,6 +993,44 @@
         </a>
 
     </div>
+
+
+
+
+
+         <div th:if="${channel_info.live != 0}" th:fragment="channel-stream-page">
+            <div class="container-fluid">
+                <div class="container">
+                    <div class="row">
+                        <div class="channel-title">
+                            <h1 th:text="${channel_info.name}"></h1>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="main_event_player">
+                            <div class="content" th:utext="${channel_info.code}"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <div th:fragment="admin-channel-list">
+        <div class="container-fluid">
+            <div class="container">
+                <th:block th:each="channel_info : ${channel_info_list}">
+                    <div class="row">
+                        <div class="channel-title">
+                            <a th:href="'/admin/channel-settings/' + ${channel_info.channel_id}">
+                             <h1 th:text="${channel_info.name}"></h1>
+                            </a>
+                        </div>
+                    </div>
+                </th:block>
+            </div>
+        </div>
+    </div>
+
 
 
 </body>

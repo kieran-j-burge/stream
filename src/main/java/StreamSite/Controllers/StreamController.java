@@ -35,16 +35,38 @@ public class StreamController {
     public String getStream(Model model, HttpSession session,
                                          @PathVariable("id") int id){
 
-//        try {
+        try {
             model.addAttribute("stream_info", streamService.getStreamById(id));
             model.addAttribute("channel_list", streamService.getStreamChannel(id));
 
             return "webpage/stream_page";
 
-//        } catch (Exception e){
+        } catch (Exception e){
 
-//            return "webpage/error_page";
-//        }
+            return "webpage/error_page";
+        }
+
+    }
+
+    @RequestMapping(value = "/channel/{id}", method = GET)
+    public String getChannelStream(Model model, HttpSession session,
+                            @PathVariable("id") int id){
+
+        try {
+            if (streamService.getChannel(id).getLive() == 1){
+                model.addAttribute("channel_info", streamService.getChannel(id));
+                return "webpage/channel_stream";
+
+            }
+            else{
+                return "webpage/no-channel-stream";
+            }
+
+
+        } catch (Exception e){
+
+            return "webpage/error_page";
+        }
 
     }
 

@@ -747,7 +747,7 @@ list-style-type: none;
     margin-top: 100px;
 }
 
-.main-event{
+.main-event-on{
     animation-name: live;
     animation-duration: 2s;
     animation-iteration-count: infinite;
@@ -756,6 +756,12 @@ list-style-type: none;
      border-radius: 3px;
      float: right;
  }
+
+.main-event{
+    color: black;
+    border-radius: 3px;
+    float: right;
+}
 
 .main-event:hover{
     background-color: #0093dd;
@@ -842,4 +848,16 @@ font-size: 30px;
 .live-event-title{
     margin-top: 100px;
 }
+
+.channel-title{
+    text-align: center;
+
+}
+
+.channel-title h1{
+    font-size: 65px;
+    text-shadow: 1px 1px 2px #2d2d2d;
+
+}
+
 

@@ -1,6 +1,7 @@
 package StreamSite.Services;
 
 import StreamSite.DTO.Channel;
+import StreamSite.DTO.ChannelStream;
 import StreamSite.DTO.Stream;
 
 import java.util.List;
@@ -13,4 +14,5 @@ public interface StreamService {
     List<Channel> getStreamChannel(int id);
     List<Stream> getGenStreamsByGameId(int id);
     Stream getGenStreamById(int id);
+    ChannelStream getChannel(int id);
 }

@@ -30,4 +30,12 @@ public interface AdminDAO {
     List<GameInfoShort> getGamesForTweet();
     void setMainEvent(int id, String code);
     void mainEventOff();
+    String getChannelTweet();
+    List<ChannelStream> getChannelList();
+    void setChannelOff(int id);
+    void setChannelCode(int id,String code);
+    String getChannelTweetBgn();
+    String getChannelTweetEnd();
+    void setChannelOn(int id);
+
 }

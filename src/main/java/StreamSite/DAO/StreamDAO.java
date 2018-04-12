@@ -1,6 +1,7 @@
 package StreamSite.DAO;
 
 import StreamSite.DTO.Channel;
+import StreamSite.DTO.ChannelStream;
 import StreamSite.DTO.Stream;
 
 import java.util.List;
@@ -14,4 +15,6 @@ public interface StreamDAO {
     List<Channel> getStreamChannel(int id);
     List<Stream> getGenStreamsByGameId(int id);
     Stream getGenStreamById(int id);
+    ChannelStream getChannel(int id);
+
 }

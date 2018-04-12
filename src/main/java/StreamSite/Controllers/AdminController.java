@@ -390,6 +390,68 @@ public class AdminController {
         }
     }
 
+    @RequestMapping(value = "/admin/set-channel/off/{id}", method = POST)
+    public String setChannelOff(Model model, HttpSession session,@PathVariable("id") int id){
+
+        Account account = (Account) session.getAttribute("account");
+
+        if (account == null){
+            return "redirect:/";
+
+        }
+        else if (account.getPermissions() == 1){
+            adminService.setChannelOff(id);
+            return "fragments :: admin-channel-off-msg";
+        }
+        else{
+            return "redirect:/";
+
+        }
+    }
+
+    @RequestMapping(value = "/admin/set-channel/on/{id}", method = POST)
+    public String setChannelOn(Model model, HttpSession session,@PathVariable("id") int id){
+
+        Account account = (Account) session.getAttribute("account");
+
+        if (account == null){
+            return "redirect:/";
+
+        }
+        else if (account.getPermissions() == 1){
+            adminService.setChannelOn(id);
+            return "fragments :: admin-channel-on-msg";
+        }
+        else{
+            return "redirect:/";
+
+        }
+    }
+
+    @RequestMapping(value = "/admin/set-channel/code/{id}/{code}", method = POST)
+    public String setChannelOff(Model model, HttpSession session,@PathVariable("id") int id ,@PathVariable("code") String code){
+
+        code = code.replaceAll("£",".");
+        code = code.replaceAll("`","/");
+
+        Account account = (Account) session.getAttribute("account");
+
+        if (account == null){
+            return "redirect:/";
+
+        }
+        else if (account.getPermissions() == 1){
+            adminService.setChannelCode(id,code);
+            return "fragments :: admin-channel-off-msg";
+        }
+        else{
+            return "redirect:/";
+
+        }
+    }
+
+
+
 
 
     @RequestMapping(value = "/admin/set-main-event/{id}/{code}", method = POST)
@@ -407,6 +469,48 @@ public class AdminController {
 
             adminService.setMainEvent(id,code);
             return "fragments :: main-event-response-msg";
+        }
+        else{
+            return "redirect:/";
+
+        }
+    }
+
+    @RequestMapping(value = "/admin/channel-settings", method = GET)
+    public String channelSettings(Model model, HttpSession session){
+
+
+        Account account = (Account) session.getAttribute("account");
+
+        if (account == null){
+            return "redirect:/";
+
+        }
+        else if (account.getPermissions() == 1){
+
+            model.addAttribute("channel_info_list", adminService.getChannelList());
+            return "webpage/channel-settings";
+
+        }
+        else{
+            return "redirect:/";
+
+        }
+    }
+
+    @RequestMapping(value = "/admin/channel-settings/{id}", method = GET)
+    public String channelSettings(Model model, HttpSession session, @PathVariable("id") int id){
+
+
+        Account account = (Account) session.getAttribute("account");
+
+        if (account == null){
+            return "redirect:/";
+
+        }
+        else if (account.getPermissions() == 1){
+            model.addAttribute("channel_id",id);
+            return "webpage/channel-settings-page";
         }
         else{
             return "redirect:/";

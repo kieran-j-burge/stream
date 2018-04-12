@@ -122,17 +122,17 @@ public class AdminServiceImpl implements AdminService {
             int difference = minutesDifference(game.getKo_time_date(),timestamp);
 
             if (difference >=0 && difference <5){
-                performFiveMinuteTweet(getFiveMinuteTweet(game.getGame_id()));
+                performTweet(getFiveMinuteTweet(game.getGame_id()));
             }
 
             else if (difference >= 25 && difference <30){
                 if (game.getLeague_id() == 1 || game.getLeague_id() == 2|| game.getLeague_id() == 8|| game.getLeague_id() ==9|| game.getLeague_id() ==11|| game.getLeague_id() ==15){
-                    performThirtyMinuteTweet(getThirtyMinuteTweet(game.getGame_id()));
+                    performTweet(getThirtyMinuteTweet(game.getGame_id()));
                 }
             }
 
             else if (difference <=-55 && difference > -60){
-                performHTTweet(getHTTweet(game.getGame_id()));
+                performTweet(getHTTweet(game.getGame_id()));
             }
         }
     }
@@ -145,6 +145,42 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void mainEventOff() {
         adminDAO.mainEventOff();
+    }
+
+    @Override
+    public void tweetChannel() {
+        String channel_name = adminDAO.getChannelTweet();
+
+        if (channel_name != null){
+            String tweetBgn = adminDAO.getChannelTweetBgn();
+            String tweetEnd = adminDAO.getChannelTweetEnd();
+            String tweetMsg = tweetBgn + " "+channel_name+ " | " + tweetEnd + " #" +channel_name.replaceAll(" ","");
+            performTweet(tweetMsg);
+        }
+        else{
+
+        }
+    }
+
+    @Override
+    public List<ChannelStream> getChannelList() {
+        System.out.println(adminDAO.getChannelList().size());
+        return adminDAO.getChannelList();
+    }
+
+    @Override
+    public void setChannelOff(int id) {
+        adminDAO.setChannelOff(id);
+    }
+
+    @Override
+    public void setChannelCode(int id, String code) {
+        adminDAO.setChannelCode(id,code);
+    }
+
+    @Override
+    public void setChannelOn(int id) {
+        adminDAO.setChannelOn(id);
     }
 
     @Override
@@ -187,7 +223,7 @@ public class AdminServiceImpl implements AdminService {
         return twtMsg;
     }
 
-    private void performHTTweet(String tweetMsg) {
+    private void performTweet(String tweetMsg) {
         ConfigurationBuilder cb = new ConfigurationBuilder();
         cb.setDebugEnabled(true)
                 .setOAuthConsumerKey(consumerKey)
@@ -207,47 +243,7 @@ public class AdminServiceImpl implements AdminService {
         }
     }
 
-    private void performThirtyMinuteTweet(String tweetMsg) {
-        ConfigurationBuilder cb = new ConfigurationBuilder();
-        cb.setDebugEnabled(true)
-                .setOAuthConsumerKey(consumerKey)
-                .setOAuthConsumerSecret(consumerSecret)
-                .setOAuthAccessToken(accessToken)
-                .setOAuthAccessTokenSecret(accessSecret);
 
-
-        try
-        {
-            TwitterFactory factory = new TwitterFactory(cb.build());
-            Twitter twitter = factory.getInstance();
-
-            twitter.updateStatus(tweetMsg);
-        }catch (TwitterException te) {
-            te.printStackTrace();
-            System.exit(-1);
-        }
-    }
-
-    private void performFiveMinuteTweet(String tweetMsg) {
-        ConfigurationBuilder cb = new ConfigurationBuilder();
-        cb.setDebugEnabled(true)
-                .setOAuthConsumerKey(consumerKey)
-                .setOAuthConsumerSecret(consumerSecret)
-                .setOAuthAccessToken(accessToken)
-                .setOAuthAccessTokenSecret(accessSecret);
-
-
-        try
-        {
-            TwitterFactory factory = new TwitterFactory(cb.build());
-            Twitter twitter = factory.getInstance();
-
-            twitter.updateStatus(tweetMsg);
-        }catch (TwitterException te) {
-            te.printStackTrace();
-            System.exit(-1);
-        }
-    }
 
     private static int hoursDifference(Timestamp ko_time, Timestamp now) {
 
