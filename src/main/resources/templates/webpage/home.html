@@ -91,31 +91,88 @@
 </div>
 
 
-
 <div class="container-fluid home-page-main-container">
     <div class="container ">
         <div class="row">
-            <h1 class="upcoming-games-msg">Upcoming Games</h1>
-        </div>
-        <div class="col-md-8 col-sm-12">
-            <div th:replace="fragments :: home-game-list-simple">
+
+            <div class="col-md-4 col-sm-12">
+                <a href="/channel/1">
+                    <div class="row channel-img">
+                        <img src="/images/channels/1.svg" />
+                    </div>
+                </a>
+                <a href="/channel/3">
+                    <div class="row channel-img">
+                        <img src="/images/channels/2.svg" />
+                    </div>
+                </a>
+
+                <a href="/channel/2">
+                    <div class="row channel-img">
+                        <img src="/images/channels/3.svg" />
+                    </div>
+                </a>
+
+                <a href="/channel/4">
+                    <div class="row channel-img">
+                         <img src="/images/channels/4.png" />
+                    </div>
+                </a>
+
+                <a href="/channel/5">
+
+                    <div class="row channel-img">
+                        <img src="/images/channels/5.png" />
+                    </div>
+                </a>
+
+                <a href="/channel/6">
+                    <div class="row channel-img">
+                         <img src="/images/channels/6.png" />
+                    </div>
+                </a>
+
 
             </div>
-        </div>
-        <div class="col-md-4 col-sm-12">
-            <div id="pickGameMsgContainer">
-                <h1>Pick a Game from the <b>Upcoming Games!</b> Or if you are looking for a specific match in the near future have a look at our
-                    <a href="/game_list"> <b> Game List </b></a> or even look at upcoming games by <a href="/leagues"><b>League</b></a>.</h1>
+
+            <div class="col-md-8 col-sm-12">
+                <h1 class="upcoming-games-msg">Upcoming Games</h1>
+                <div th:replace="fragments :: home-game-list-simple">
+
+                </div>
             </div>
+
         </div>
     </div>
 </div>
+
+<!--<div class="container-fluid home-page-main-container">-->
+    <!--<div class="container ">-->
+        <!--<div class="row">-->
+            <!--<h1 class="upcoming-games-msg">Upcoming Games</h1>-->
+        <!--</div>-->
+        <!--<div class="col-md-8 col-sm-12">-->
+            <!--<div th:replace="fragments :: home-game-list-simple">-->
+
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="col-md-4 col-sm-12">-->
+            <!--<div id="pickGameMsgContainer">-->
+                <!--<h1>Pick a Game from the <b>Upcoming Games!</b> Or if you are looking for a specific match in the near future have a look at our-->
+                    <!--<a href="/game_list"> <b> Game List </b></a> or even look at upcoming games by <a href="/leagues"><b>League</b></a>.</h1>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
 
 <div th:replace="fragments :: adskeeper-under">
 
 </div>
 
 
+<div th:replace="fragments :: disclaimer">
+
+</div>
 
 <div th:replace="fragments :: footer">
 

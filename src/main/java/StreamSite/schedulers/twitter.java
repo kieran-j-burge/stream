@@ -44,7 +44,7 @@ public class twitter {
         }
     }
 
-    @Scheduled(cron="0 */50 * * * *")
+    @Scheduled(cron="0 */35 * * * *")
     public void doChannelTweet() {
         try {
             adminService.tweetChannel();
