@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/data/jaxb">
+<head th:replace="fragments :: head">
+
+</head>
+<body>
+
+<nav th:replace="fragments :: nav">
+
+</nav>
+
+
+
+<div id="response-message-container">
+    <div id="response-message">
+
+    </div>
+</div>
+
+
+
+    <div th:replace="fragments :: admin-channel-list">
+
+    </div>
+
+
+
+</body>
+
+<script>
+
+
+
+
+//    $(document).on('keyup', '#searchGame', function(){
+//        var searchText = $('#searchGame').val();
+//        var searchLen  = searchText.length;
+//
+//        if (searchLen >= 1) {
+//            url ='/admin/search/' + $('#searchGame').val();
+//        }
+//        else{
+//            url ='/admin/load_home';
+//        }
+//
+//        $("#resultsBlock").load(url);
+//    });
+
+
+
+</script>
+
+</html>
