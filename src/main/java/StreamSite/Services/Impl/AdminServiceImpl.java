@@ -33,10 +33,14 @@ public class AdminServiceImpl implements AdminService {
 //    private String consumerSecret = "71hxklzhPszVK8NBFKk9KH7VY056QxFZjxd1zh6fqLhh0VI3df";
 //    private String accessToken = "983416989329842177-XjHTYrNED5Zp6UfR0DOJJWPKVqiOV1D";
 //    private String accessSecret = "kcl6LW0dvCHVwAaxRJVAiZ3jYBjm9euXKqApRnq3rVuFe";
-    private String consumerKey = "zbZ2kZVlstVAw8LINGITkWbTw";
-    private String consumerSecret = "T8UqlZi8mfd1VbQzSt1TA6RsXCAt8UR07gYYXKWgV45Se1Vnac";
-    private String accessToken = "979741991754960896-27l8sNqq06zvYpK6k3QcgXFQrxoNvPH";
-    private String accessSecret = "W3yNdka16WvAqF9AylxBlNx0OdKOFW9BXX8mWICmIAJ9H";
+//    private String consumerKey = "zbZ2kZVlstVAw8LINGITkWbTw";
+//    private String consumerSecret = "T8UqlZi8mfd1VbQzSt1TA6RsXCAt8UR07gYYXKWgV45Se1Vnac";
+//    private String accessToken = "979741991754960896-27l8sNqq06zvYpK6k3QcgXFQrxoNvPH";
+//    private String accessSecret = "W3yNdka16WvAqF9AylxBlNx0OdKOFW9BXX8mWICmIAJ9H";
+    private String consumerKey = "2zZQW52VjHZrHGIyLXoLEuP9M";
+    private String consumerSecret = "Myl3fQlUeCcz3ypemxLJaR8vV3F3wG0F17MTvUnclHscHQxGX4";
+    private String accessToken = "985156766701846528-cWlbbyiuNfraeKLcFqxxb3xUglj6Xb5";
+    private String accessSecret = "JubAXzJu53e9gin2tX0BU2bt6n6YqGKJtpNuroC3ioR0y";
 
     Random rand = new Random();
 
