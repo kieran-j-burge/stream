@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/data/jaxb">
+<head th:replace="fragments :: head">
+
+</head>
+<body>
+
+<nav th:replace="fragments :: nav">
+
+</nav>
+
+
+<div class="container-fluid">
+    <div class="container">
+        <div class="row">
+            <div>
+                <p id="gameID" th:text="${game_info.game_id}"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragments :: game-info-frag"></div>
+
+<div class="input-group col-sm-12">
+    <input id="code-main-event" maxlength="1000" type="text" class="  search-query form-control" placeholder="Place Code" />
+</div>
+
+<a class="btn btn-info btn-lg set_main-event">
+    <span class="glyphicon "></span> Change Event
+</a>
+
+
+
+<div id="response-message-container">
+    <div id="response-message">
+
+    </div>
+</div>
+<!--<div class="container-fluid">-->
+    <!--<div class="container header-title">-->
+        <!--<h1>Game List</h1>-->
+    <!--</div>-->
+<!--</div>-->
+
+<!--<div class="container search-container">-->
+    <!--<div class="row">-->
+        <!--<div id="custom-search-input">-->
+            <!--<div class="input-group col-md-12">-->
+                <!--<input id="searchGame" type="text" class="  search-query form-control" placeholder="Search" />-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+
+<!--<div id="resultsBlock">-->
+    <!--<div th:replace="fragments :: admin_page_game_list"></div>-->
+<!--</div>-->
+
+</body>
+
+<script>
+
+
+
+
+    $(document).on('click', '.set_main-event', function(){
+        var code = $('#code-main-event').val();
+
+        code = code.replace(/\./g,'£');
+        code = code.replace(/\//g,'`');
+
+        url ='/admin/set-main-event/' + $('#gameID').text() +"/"+code;
+
+        $.post(url, function (data, status) {
+            $("#response-message").text("Code Added - Main Event Live");
+        });
+
+    });
+
+
+
+</script>
+
+</html>

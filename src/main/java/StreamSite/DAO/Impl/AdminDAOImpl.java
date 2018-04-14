@@ -87,7 +87,7 @@ public class AdminDAOImpl implements AdminDAO {
     @Override
     public List<GameInfo> getTweet() {
         List<GameInfo> gameInfoList = new ArrayList<>();
-        jdbcTemplate.query("SELECT game.game_id, game.home, game.away, CAST(ko_time AS DATE) as ko_time_date , (SELECT `name` FROM clubs WHERE club_id = game.home) AS 'HomeTeam', (SELECT `name` FROM clubs WHERE club_id = game.away) AS ' AwayTeam', (SELECT image from clubs where club_id = game.home) AS 'HomeImg',(SELECT image from clubs where club_id = game.away) AS 'AwayImg', game.ko_time FROM game WHERE visable = 1 ORDER BY ko_time LIMIT 20;",
+        jdbcTemplate.query("SELECT game.game_id, game.home, game.away, CAST(ko_time AS DATE) as ko_time_date , (SELECT `name` FROM clubs WHERE club_id = game.home) AS 'HomeTeam', (SELECT `name` FROM clubs WHERE club_id = game.away) AS ' AwayTeam', (SELECT image from clubs where club_id = game.home) AS 'HomeImg',(SELECT image from clubs where club_id = game.away) AS 'AwayImg', game.ko_time FROM game WHERE visable = 1 ORDER BY ko_time LIMIT 100;",
                 new Object[]{},
                 (rs, rowNum) -> gameInfoList.add(new GameInfo(
                         rs.getInt("game_id"),

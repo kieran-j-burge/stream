@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/data/jaxb">
+<head th:replace="fragments :: head">
+
+</head>
+<body>
+
+<nav th:replace="fragments :: nav">
+
+</nav>
+
+<div th:replace="fragments :: add-game-box">
+
+</div>
+
+<div id="result-box-add-game">
+    <p></p>
+</div>
+
+
+<div class="container search-container">
+    <div class="row">
+        <div id="custom-search-input">
+            <div class="input-group col-sm-12">
+                <input id="searchGame" maxlength="30" type="text" class="  search-query form-control" placeholder="Search" />
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="resultsBlock">
+    <div th:replace="fragments :: home_page_game_list">
+
+    </div>
+</div>
+
+</body>
+
+<script>
+
+
+</script>
+
+
+</html>

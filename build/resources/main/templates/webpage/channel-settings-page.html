@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/data/jaxb">
+<head th:replace="fragments :: head">
+
+</head>
+<body>
+
+<nav th:replace="fragments :: nav">
+
+</nav>
+
+
+<div class="container-fluid">
+    <div class="container">
+        <div class="row">
+            <div>
+                <p id="channelID" th:text="${channel_id}"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="container">
+        <div class="row">
+            <div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<a class="btn btn-info btn-lg channel_off">
+    <span class="glyphicon "></span> Turn Off
+</a>
+
+<a class="btn btn-info btn-lg channel_on">
+    <span class="glyphicon "></span> Turn On
+</a>
+
+
+<div class="input-group col-sm-12">
+    <input id="code-channel" maxlength="1000" type="text" class="  search-query form-control" placeholder="Place Code" />
+</div>
+
+<a class="btn btn-info btn-lg set_channel_code">
+    <span class="glyphicon "></span> Change Channel Code
+</a>
+
+
+
+<div id="response-message-container">
+    <div id="response-message">
+
+    </div>
+</div>
+
+
+</body>
+
+<script>
+
+
+
+
+    $(document).on('click', '.set_channel_code', function(){
+        var code = $('#code-channel').val();
+
+        code = code.replace(/\./g,'£');
+        code = code.replace(/\//g,'`');
+
+        url ='/admin/set-channel/code/' + $('#channelID').text() +"/"+code;
+
+        $.post(url, function (data, status) {
+            $("#response-message").text("Code Added - Channel Changed");
+        });
+
+    });
+
+    $(document).on('click', '.channel_off', function(){
+        url ='/admin/set-channel/off/'+ $('#channelID').text() ;
+
+        $.post(url, function (data, status) {
+            $("#response-message").text("channel OFF");
+        });
+    });
+
+    $(document).on('click', '.channel_on', function(){
+        url ='/admin/set-channel/on/'+ $('#channelID').text() ;
+
+        $.post(url, function (data, status) {
+            $("#response-message").text("channel ON");
+        });
+    });
+
+
+</script>
+
+</html>
