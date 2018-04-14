@@ -247,6 +247,46 @@ public class AdminServiceImpl implements AdminService {
         }
     }
 
+    private void performTweet2(String tweetMsg) {
+        ConfigurationBuilder cb = new ConfigurationBuilder();
+        cb.setDebugEnabled(true)
+                .setOAuthConsumerKey(consumerKey)
+                .setOAuthConsumerSecret(consumerSecret)
+                .setOAuthAccessToken(accessToken)
+                .setOAuthAccessTokenSecret(accessSecret);
+
+
+        try
+        {
+            TwitterFactory factory = new TwitterFactory(cb.build());
+            Twitter twitter = factory.getInstance();
+            twitter.updateStatus(tweetMsg);
+        }catch (TwitterException te) {
+            te.printStackTrace();
+            System.exit(-1);
+        }
+    }
+
+    private void performTweet3(String tweetMsg) {
+        ConfigurationBuilder cb = new ConfigurationBuilder();
+        cb.setDebugEnabled(true)
+                .setOAuthConsumerKey(consumerKey)
+                .setOAuthConsumerSecret(consumerSecret)
+                .setOAuthAccessToken(accessToken)
+                .setOAuthAccessTokenSecret(accessSecret);
+
+
+        try
+        {
+            TwitterFactory factory = new TwitterFactory(cb.build());
+            Twitter twitter = factory.getInstance();
+            twitter.updateStatus(tweetMsg);
+        }catch (TwitterException te) {
+            te.printStackTrace();
+            System.exit(-1);
+        }
+    }
+
 
 
     private static int hoursDifference(Timestamp ko_time, Timestamp now) {

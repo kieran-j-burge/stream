@@ -44,14 +44,14 @@ public class twitter {
         }
     }
 
-    @Scheduled(cron="0 */35 * * * *")
-    public void doChannelTweet() {
-        try {
-            adminService.tweetChannel();
-
-        } catch (Exception e){
-
-        }
-    }
+//    @Scheduled(cron="0 */35 * * * *")
+//    public void doChannelTweet() {
+//        try {
+//            adminService.tweetChannel();
+//
+//        } catch (Exception e){
+//
+//        }
+//    }
 
 }
