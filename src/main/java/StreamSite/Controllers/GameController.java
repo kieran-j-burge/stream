@@ -44,12 +44,12 @@ public class GameController {
     public String retreiveGamePage(Model model, HttpSession session,
                                    @PathVariable("id") int id){
         try {
-//            try{
+            try{
                 model.addAttribute("main_event", gameService.checkMainEvent(id));
-//            } catch (Exception e){
-//
-//                model.addAttribute("main_event",null);
-//            }
+            } catch (Exception e){
+
+                model.addAttribute("main_event",null);
+            }
 
             model.addAttribute("game_info", gameService.getGameById(id));
             model.addAttribute("stream_list", streamService.getStreamsByGameId(id));
